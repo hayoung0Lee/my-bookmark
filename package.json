@@ -1,0 +1,16 @@
+{
+  "name": "my-bookmark",
+  "version": "1.0.0",
+  "description": "- [Getting started - chrome extension](https://developer.chrome.com/docs/extensions/mv3/getstarted/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc-watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tsc-watch": "^4.6.0"
+  }
+}

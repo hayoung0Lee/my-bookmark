@@ -2,5 +2,9 @@
     "name": "Bookmark with memo",
     "description": "This is a bookmark extension with memo feature",
     "version": "1.0",
-    "manifest_version": 3
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "dist/background.js"
+    },
+    "options_page": "public/options.html"
 }

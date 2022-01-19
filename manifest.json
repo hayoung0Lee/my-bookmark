@@ -6,5 +6,36 @@
     "background": {
         "service_worker": "dist/background.js"
     },
-    "options_page": "public/options.html"
+    "options_page": "public/options.html",
+    "permissions": [
+        "bookmarks",
+        "storage",
+        "activeTab",
+        "scripting",
+        "<all_urls>"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "dist/contents/index.js"
+            ]
+        }
+    ],
+    "action": {
+        "default_title": "Press it to open bookmark"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "dist/contents/*"
+            ],
+            "matches": [
+                "<all_urls>"
+            ],
+            "use_dynamic_url": true
+        }
+    ]
 }

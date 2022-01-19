@@ -21,6 +21,9 @@
             ],
             "js": [
                 "dist/contents/index.js"
+            ],
+            "css": [
+                "dist/contents/index.css"
             ]
         }
     ],

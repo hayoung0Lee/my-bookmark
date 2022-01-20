@@ -33,4 +33,7 @@
 - Tailwind css
   - https://parceljs.org/recipes/react/#tailwind-css
 
-- [css seperation](https://medium.com/@liviazhang/chrome-extension-how-to-completely-separate-your-content-scripts-css-from-websites-css-f379482be91a)
+- [rendering in an iframe](https://dev.to/graftini/rendering-in-an-iframe-in-a-react-app-2boa)
+
+  - iframe내에 뭔가 넣으려면 무조건 portal을
+    써야하나봄:https://stackoverflow.com/questions/34743264/how-to-set-iframe-content-of-a-react-component

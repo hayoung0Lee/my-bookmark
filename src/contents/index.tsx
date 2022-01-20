@@ -1,10 +1,34 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect, useState } from "react";
+import ReactDOM, { createPortal } from "react-dom";
 import App from "./App";
-import "./index.css";
 
-// alert("hello");
-console.log("hello");
+const IFrame = ({ children }: { children: JSX.Element }) => {
+  const [ref, setRef] = useState<HTMLIFrameElement | null>();
+  const container = ref?.contentWindow?.document?.body;
+  useEffect(() => {
+    if (ref?.contentWindow?.document) {
+      var cssLink = document.createElement("link");
+      cssLink.href = chrome.runtime.getURL("./dist/contents/index.css");
+      cssLink.rel = "stylesheet";
+      cssLink.type = "text/css";
+      ref?.contentWindow?.document.head.appendChild(cssLink);
+    }
+  }, [ref]);
+
+  return (
+    <iframe ref={setRef}>
+      {container && createPortal(children, container)}
+    </iframe>
+  );
+};
+
+const IframeWrapper = () => {
+  return (
+    <IFrame>
+      <App />
+    </IFrame>
+  );
+};
 
 const findOrCreateAndAttachRoot = () => {
   if (document.getElementById("root")) {
@@ -18,4 +42,4 @@ const findOrCreateAndAttachRoot = () => {
 
 const rootDom = findOrCreateAndAttachRoot();
 
-ReactDOM.render(<App />, rootDom);
+ReactDOM.render(<IframeWrapper />, rootDom);

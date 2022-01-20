@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 const App = () => {
   const [open, toggleOpen] = useState(false);
 
+  console.log("app");
   useEffect(() => {
     chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
       toggleOpen((prev) => !prev);
@@ -14,7 +15,9 @@ const App = () => {
     return (
       <div>
         Open
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <h1 className="text-3xl font-bold underline decoration-green-50">
+          Hello world!
+        </h1>
       </div>
     );
   }

@@ -33,7 +33,18 @@
 - Tailwind css
   - https://parceljs.org/recipes/react/#tailwind-css
 
+## Iframe 동작
+
+해결이 안되서 우회했다.
+
 - [rendering in an iframe](https://dev.to/graftini/rendering-in-an-iframe-in-a-react-app-2boa)
 
   - iframe내에 뭔가 넣으려면 무조건 portal을
     써야하나봄:https://stackoverflow.com/questions/34743264/how-to-set-iframe-content-of-a-react-component
+
+  - [css 지정하는 방법](https://itnext.io/create-chrome-extension-with-reactjs-using-inject-page-strategy-137650de1f39)
+
+- [iframe resizer](https://github.com/davidjbradshaw/iframe-resizer)
+  - [react](https://github.com/davidjbradshaw/iframe-resizer-react)
+
+- [react frame component](https://github.com/ryanseddon/react-frame-component)

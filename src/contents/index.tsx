@@ -1,10 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ReactDOM, { createPortal } from "react-dom";
 import App from "./App";
+import "./index.css";
 
-const IFrame = ({ children }: { children: JSX.Element }) => {
+const IFRAME_WIDTH = "300px";
+
+const IFrame = ({
+  open,
+  children,
+}: {
+  open: boolean;
+  children: JSX.Element;
+}) => {
   const [ref, setRef] = useState<HTMLIFrameElement | null>();
   const container = ref?.contentWindow?.document?.body;
+
   useEffect(() => {
     if (ref?.contentWindow?.document) {
       var cssLink = document.createElement("link");
@@ -16,16 +26,23 @@ const IFrame = ({ children }: { children: JSX.Element }) => {
   }, [ref]);
 
   return (
-    <iframe ref={setRef}>
+    <iframe ref={setRef} width={open ? IFRAME_WIDTH : `10px`} height="100%">
       {container && createPortal(children, container)}
     </iframe>
   );
 };
 
 const IframeWrapper = () => {
+  const [open, toggleOpen] = useState(false);
+  useEffect(() => {
+    chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
+      toggleOpen((prev) => !prev);
+    });
+  }, []);
+
   return (
-    <IFrame>
-      <App />
+    <IFrame open={open}>
+      <App open={open} width={`w-[${IFRAME_WIDTH}]`} />
     </IFrame>
   );
 };

@@ -23,3 +23,9 @@
 ## Parcel react
 
 - https://parceljs.org/recipes/react/
+
+## ContentScript
+
+- [docs](https://developer.chrome.com/docs/extensions/mv3/content_scripts/)
+  - "Inject with static declarations" 방식으로 했다.
+  - 이거때매 진짜 애를 좀 먹었지

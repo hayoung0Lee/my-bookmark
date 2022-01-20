@@ -12,7 +12,8 @@
         "storage",
         "activeTab",
         "scripting",
-        "<all_urls>"
+        "tabs",
+        "runtime"
     ],
     "content_scripts": [
         {

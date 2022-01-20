@@ -1,15 +1,10 @@
-// (async () => {
-//   console.log("Ts");
-//   const src = chrome.runtime.getURL("dist/contents/main.js");
-//   const contentScript = await import(src);
-//   contentScript.main(/* chrome: no need to pass it */);
-// })();
-// import { something } from "./main";
-// something();
-
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "./App";
 import "./index.css";
+
+// alert("hello");
+console.log("hello");
 
 const findOrCreateAndAttachRoot = () => {
   if (document.getElementById("root")) {
@@ -23,4 +18,4 @@ const findOrCreateAndAttachRoot = () => {
 
 const rootDom = findOrCreateAndAttachRoot();
 
-ReactDOM.render(<h1>Hello, world!</h1>, rootDom);
+ReactDOM.render(<App />, rootDom);

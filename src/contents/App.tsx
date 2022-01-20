@@ -11,10 +11,15 @@ const App = () => {
   }, []);
 
   if (open) {
-    return <div>Closed</div>;
+    return (
+      <div>
+        Open
+        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      </div>
+    );
   }
 
-  return <div>Open</div>;
+  return <></>;
 };
 
 export default App;

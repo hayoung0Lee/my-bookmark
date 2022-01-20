@@ -29,3 +29,8 @@
 - [docs](https://developer.chrome.com/docs/extensions/mv3/content_scripts/)
   - "Inject with static declarations" 방식으로 했다.
   - 이거때매 진짜 애를 좀 먹었지
+
+- Tailwind css
+  - https://parceljs.org/recipes/react/#tailwind-css
+
+- [css seperation](https://medium.com/@liviazhang/chrome-extension-how-to-completely-separate-your-content-scripts-css-from-websites-css-f379482be91a)

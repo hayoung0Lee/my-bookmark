@@ -1,0 +1,24 @@
+{
+  "name": "content-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel ./index.tsx -p 3000"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chrome": "^0.0.176",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "autoprefixer": "^10.4.2",
+    "parcel": "^2.2.1",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.15"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}

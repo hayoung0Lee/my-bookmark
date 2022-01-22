@@ -4,32 +4,9 @@
   "description": "- [Getting started - chrome extension](https://developer.chrome.com/docs/extensions/mv3/getstarted/)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:background": "tsc-watch background/index.ts --outDir ./background/dist",
-    "start:option": "tsc-watch options/index.ts --outDir ./options/dist",
-    "start:content": "parcel ./content-scripts/index.tsx --dist-dir ./content-scripts/dist",
-    "start": "concurrently npm:start:*"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@parcel/transformer-typescript-types": "^2.2.1",
-    "@types/chrome": "^0.0.176",
-    "@types/node": "^17.0.10",
-    "@types/react": "^17.0.38",
-    "@types/react-dom": "^17.0.11",
-    "autoprefixer": "^10.4.2",
-    "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.15",
-    "tsc-watch": "^4.6.0",
-    "typescript": "^4.5.4"
-  },
-  "dependencies": {
-    "concurrently": "^7.0.0",
-    "parcel": "^2.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-frame-component": "^5.2.1"
-  }
+  "license": "ISC"
 }

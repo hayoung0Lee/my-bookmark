@@ -18,7 +18,7 @@ const IFrame = ({
   useEffect(() => {
     if (ref?.contentWindow?.document) {
       var cssLink = document.createElement("link");
-      cssLink.href = chrome.runtime.getURL("/content-scripts/dist/index.css");
+      cssLink.href = chrome.runtime.getURL("content-scripts/dist/index.css");
       cssLink.rel = "stylesheet";
       cssLink.type = "text/css";
       ref?.contentWindow?.document.head.appendChild(cssLink);

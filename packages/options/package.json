@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo testing options",
-    "start": "parcel index.html -p 3001"
+    "start": "parcel index.ts"
   },
   "author": "",
   "license": "ISC",

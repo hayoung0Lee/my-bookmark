@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:background": "tsc-watch src/background.ts --outDir ./dist",
-    "start:option": "tsc-watch src/options.ts --outDir ./dist",
-    "start:content": "parcel ./src/contents/index.tsx --dist-dir dist/contents",
+    "start:background": "tsc-watch background/index.ts --outDir ./background/dist",
+    "start:option": "tsc-watch options/index.ts --outDir ./options/dist",
+    "start:content": "parcel ./content-scripts/index.tsx --dist-dir ./content-scripts/dist",
     "start": "concurrently npm:start:*"
   },
   "keywords": [],

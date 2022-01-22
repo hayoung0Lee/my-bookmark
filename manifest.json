@@ -4,9 +4,9 @@
     "version": "1.0",
     "manifest_version": 3,
     "background": {
-        "service_worker": "background/dist/index.js"
+        "service_worker": "packages/background/dist/index.js"
     },
-    "options_page": "options/dist/index.html",
+    "options_page": "packages/options/dist/index.html",
     "permissions": [
         "bookmarks",
         "storage",
@@ -21,10 +21,10 @@
                 "<all_urls>"
             ],
             "js": [
-                "content-scripts/dist/index.js"
+                "packages/content-scripts/dist/index.js"
             ],
             "css": [
-                "content-scripts/dist/index.css"
+                "packages/content-scripts/dist/index.css"
             ]
         }
     ],
@@ -34,7 +34,7 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "content-scripts/dist/*"
+                "packages/content-scripts/dist/*"
             ],
             "matches": [
                 "<all_urls>"

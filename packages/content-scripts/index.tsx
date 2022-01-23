@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import ReactDOM, { createPortal } from "react-dom";
-import App from "./App";
+import App from "./src/App";
 import "./index.css";
 
 const IFRAME_WIDTH = "300px";

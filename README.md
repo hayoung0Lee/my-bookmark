@@ -52,3 +52,11 @@
 ## Lerna
 
 - [lerna](https://youtu.be/j0FiMekdeOs)
+
+## Bookmark
+
+https://developer.chrome.com/docs/extensions/reference/bookmarks/
+
+## Message
+
+https://developer.chrome.com/docs/extensions/mv3/messaging/

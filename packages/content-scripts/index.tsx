@@ -49,16 +49,19 @@ const IframeWrapper = () => {
   );
 };
 
-const findOrCreateAndAttachRoot = () => {
-  if (document.getElementById("root")) {
-    return document.getElementById("root");
+const findOrCreateBookmarkRoot = () => {
+  const rootID = "memo_bookmark";
+
+  if (document.getElementById(rootID)) {
+    return document.getElementById(rootID);
   }
+
   const root = document.createElement("div");
-  root.id = "memo_bookmark";
+  root.id = rootID;
   document.getElementsByTagName("body")[0].appendChild(root);
   return root;
 };
 
-const rootDom = findOrCreateAndAttachRoot();
+const rootDom = findOrCreateBookmarkRoot();
 
 ReactDOM.render(<IframeWrapper />, rootDom);

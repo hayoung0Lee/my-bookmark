@@ -2,14 +2,33 @@ import React, { useState, useEffect } from "react";
 
 // https://developer.chrome.com/docs/extensions/reference/runtime/#event-onMessage
 const App = ({ open, width }: { open: boolean; width: string }) => {
-  // backgroundScript에서 메시지 받음
-  chrome.runtime.onMessage.addListener(async function (
-    request,
-    sender,
-    sendResponse
-  ) {
-    console.log("ContentScript에서 BackgroundScript에서 뭐 받음");
-  });
+  const createNewBooMark = () => {
+    // backgroundScript에 메시지 보냄
+    chrome.runtime.sendMessage(
+      { type: "create_bookmark" },
+      function (response) {
+        console.log("Bookmarks", response);
+      }
+    );
+  };
+
+  const closeBookMark = () => {
+    // backgroundScript에 메시지 보냄
+    chrome.runtime.sendMessage({ type: "close_bookmark" }, function (response) {
+      console.log("Bookmarks", response);
+    });
+  };
+
+  useEffect(() => {
+    // backgroundScript에서 메시지 받음
+    chrome.runtime.onMessage.addListener(async function (
+      request,
+      sender,
+      sendResponse
+    ) {
+      console.log("ContentScript", request);
+    });
+  }, []);
 
   if (open) {
     return (
@@ -18,15 +37,14 @@ const App = ({ open, width }: { open: boolean; width: string }) => {
       >
         Test
         <button
-          onClick={() => {
-            // backgroundScript에 메시지 보냄
-            chrome.runtime.sendMessage(
-              { type: "get_bookmarks" },
-              function (response) {
-                console.log("Bookmarks", response);
-              }
-            );
-          }}
+          className="border-solid border-2 border-indigo-600"
+          onClick={closeBookMark}
+        >
+          close
+        </button>
+        <button
+          className="border-solid border-2 border-indigo-600"
+          onClick={createNewBooMark}
         >
           click
         </button>

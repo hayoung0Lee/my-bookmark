@@ -1,52 +1,89 @@
-// Fired when an action icon is clicked. This event will not fire if the action has a popup.
+// https://developer.chrome.com/docs/extensions/reference/runtime/#event-onStartup
+
+class BookmarkManager {
+  // bookmarks
+  // bookmark 생성, 이런거 어떻게 처리할지?
+  // https://developer.chrome.com/docs/extensions/reference/bookmarks/#event-onCreated
+  bookmarks: chrome.bookmarks.BookmarkTreeNode[] = [];
+
+  constructor() {
+    this.set();
+  }
+
+  get() {
+    return this.bookmarks;
+  }
+
+  set() {
+    chrome.bookmarks.getTree((bookmarks) => {
+      this.bookmarks = bookmarks;
+      this.trigger();
+    });
+  }
+
+  trigger() {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      tabs.map((tab) => {
+        if (tab.id) {
+          chrome.tabs.sendMessage(
+            tab.id,
+            {
+              bookmarkOpen: true,
+              bookmarks: bookmarkManager.get(),
+            },
+            function (response) {
+              console.log(response);
+            }
+          );
+        }
+      });
+    });
+  }
+
+  create({ title, url }: { title: string; url: string }) {
+    chrome.bookmarks.create({ title: title, url: url }, (result) => {
+      this.set();
+    });
+  }
+
+  close(tabID: number | undefined) {
+    if (tabID) {
+      chrome.tabs.sendMessage(
+        tabID,
+        {
+          bookmarkOpen: false,
+        },
+        function (response) {
+          console.log(response);
+        }
+      );
+    }
+  }
+}
+
+const bookmarkManager = new BookmarkManager();
+
+// // When icon clicked
 chrome.action.onClicked.addListener((tab) => {
   // toggle message action 눌러서
   if (tab.id) {
-    chrome.tabs.sendMessage(tab.id, { toggle: "toggle" }, {}, (res) => {
-      console.log(`toggled!!`);
+    // send bookmark to contentscript
+    bookmarkManager.trigger(); // 보냄
+  }
+});
+
+// When button clicked in content script
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  const tabID = sender.tab?.id;
+
+  if (request.type === "create_bookmark") {
+    bookmarkManager.create({
+      title: "Test",
+      url: "https://hayoung-techlog.com/",
     });
   }
-});
 
-// bookmarks
-// bookmark 생성, 이런거 어떻게 처리할지?
-// https://developer.chrome.com/docs/extensions/reference/bookmarks/#event-onCreated
-let bookmarksArr: chrome.bookmarks.BookmarkTreeNode[] = [];
-
-const getTree = () => {
-  chrome.bookmarks.getTree((bookmarks) => {
-    bookmarksArr = bookmarks;
-  });
-};
-
-getTree();
-
-// 1. backgroundScript에서 보낸다.
-chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  if (tabs[0].id) {
-    chrome.tabs.sendMessage(
-      tabs[0].id,
-      { greeting: "hello", bookmarks: bookmarksArr },
-      function (response) {
-        console.log(response.farewell);
-      }
-    );
-  }
-});
-
-chrome.bookmarks.onCreated.addListener(function (id, bookmark) {});
-
-// message 받고, 보내는것 처리
-// onMessage received
-// 2. 뭐 받았을때
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  console.log(
-    sender.tab
-      ? "from a content script:" + sender.tab.url
-      : "from the extension"
-  );
-
-  if (request.type === "get_bookmarks") {
-    sendResponse({ body: "hello", result: bookmarksArr });
+  if (request.type === "close_bookmark") {
+    bookmarkManager.close(tabID);
   }
 });

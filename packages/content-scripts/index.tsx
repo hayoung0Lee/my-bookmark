@@ -36,9 +36,11 @@ const IFrame = ({
 
 const IframeWrapper = () => {
   const [open, toggleOpen] = useState(false);
+
   useEffect(() => {
     chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
-      toggleOpen((prev) => !prev);
+      toggleOpen(message.bookmarkOpen);
+      console.log("bookmarks", message.bookmarks);
     });
   }, []);
 

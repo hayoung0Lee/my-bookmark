@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
 import Bookmark from "./Bookmark";
+import { createNewBooMark, requestBookMarks } from "./utils/bookmarkHandler";
 
 // https://developer.chrome.com/docs/extensions/reference/runtime/#event-onMessage
 const App = ({
@@ -11,29 +12,6 @@ const App = ({
   toggleOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [modal, openModal] = useState(false);
-
-  useEffect(() => {
-    // message받았을때
-    onReceiveMessage();
-  }, []);
-
-  const onReceiveMessage = () => {
-    // backgroundScript에서 메시지 받음
-    chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
-      toggleOpen(message.bookmarkOpen);
-      console.log("bookmarks", message.bookmarks);
-    });
-  };
-
-  const createNewBooMark = () => {
-    // backgroundScript에 메시지 보냄
-    chrome.runtime.sendMessage(
-      { type: "create_bookmark" },
-      function (response) {
-        console.log("Bookmarks", response);
-      }
-    );
-  };
 
   const openBookMark = () => {
     toggleOpen(true);
@@ -46,7 +24,11 @@ const App = ({
   if (open) {
     return (
       <>
-        <Bookmark closeBookMark={closeBookMark} openModal={openModal} />
+        <Bookmark
+          closeBookMark={closeBookMark}
+          openModal={openModal}
+          toggleOpen={toggleOpen}
+        />
         {modal && (
           <Modal openModal={openModal}>
             <div>

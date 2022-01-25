@@ -23,6 +23,7 @@ export class BookmarkManager implements MessageTarget {
   }
 
   trigger() {
+    console.log("Trigger");
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       tabs.map((tab) => {
         if (tab.id) {

@@ -1,5 +1,9 @@
 import { MessageTarget, ContentScriptMessage } from "./types";
-import { CREATE_BOOKMARK, CLOSE_BOOKMARK } from "./constants";
+import {
+  CREATE_BOOKMARK,
+  CLOSE_BOOKMARK,
+  REQUEST_BOOKMARK,
+} from "../../common";
 
 export class MessageHandler<T extends MessageTarget> {
   constructor(public messageTarget: T) {
@@ -35,6 +39,11 @@ export class MessageHandler<T extends MessageTarget> {
         // if (request.type === CLOSE_BOOKMARK) {
         //   this.messageTarget.close(tabID);
         // }
+
+        if (request.type === REQUEST_BOOKMARK) {
+          this.messageTarget.set();
+          console.log("MessageHandler");
+        }
       }
     );
   }

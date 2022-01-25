@@ -1,5 +1,5 @@
 // https://developer.chrome.com/docs/extensions/reference/runtime/#event-onStartup
-import { MessageTarget } from "./types";
+import { ContentScriptMessage, MessageTarget } from "./types";
 
 export class BookmarkManager implements MessageTarget {
   // bookmarks
@@ -41,8 +41,10 @@ export class BookmarkManager implements MessageTarget {
     });
   }
 
-  create({ title, url }: { title: string; url: string }) {
-    chrome.bookmarks.create({ title: title, url: url }, (result) => {
+  create(bookmarkArg: ContentScriptMessage) {
+    const { index, parentId, title, url } = bookmarkArg;
+
+    chrome.bookmarks.create({ index, parentId, title, url }, (result) => {
       this.set();
     });
   }

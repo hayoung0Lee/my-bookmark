@@ -1,4 +1,5 @@
-import { MessageTarget } from "./types";
+import { MessageTarget, ContentScriptMessage } from "./types";
+import { CREATE_BOOKMARK, CLOSE_BOOKMARK } from "./constants";
 
 export class MessageHandler<T extends MessageTarget> {
   constructor(public messageTarget: T) {
@@ -23,19 +24,18 @@ export class MessageHandler<T extends MessageTarget> {
 
   contentScriptMessageReceiver() {
     // When button clicked in content script
-    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-      const tabID = sender.tab?.id;
+    chrome.runtime.onMessage.addListener(
+      (request: ContentScriptMessage, sender, sendResponse) => {
+        const tabID = sender.tab?.id;
 
-      if (request.type === "create_bookmark") {
-        this.messageTarget.create({
-          title: "Test",
-          url: "https://hayoung-techlog.com/",
-        });
-      }
+        if (request.type === CREATE_BOOKMARK) {
+          this.messageTarget.create(request);
+        }
 
-      if (request.type === "close_bookmark") {
-        this.messageTarget.close(tabID);
+        // if (request.type === CLOSE_BOOKMARK) {
+        //   this.messageTarget.close(tabID);
+        // }
       }
-    });
+    );
   }
 }

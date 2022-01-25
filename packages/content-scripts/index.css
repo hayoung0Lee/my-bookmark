@@ -2,11 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-#memo_bookmark {
-    position: fixed;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background: #ffffff;
-    z-index: 2147483646;
-}

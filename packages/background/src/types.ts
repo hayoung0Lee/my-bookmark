@@ -1,7 +1,12 @@
+export interface ContentScriptMessage
+  extends chrome.bookmarks.BookmarkCreateArg {
+  type: string;
+}
+
 export interface MessageTarget {
   get: () => void;
   set: () => void;
   trigger: () => void;
-  create: ({ title, url }: { title: string; url: string }) => void;
+  create: (bookmarkArg: ContentScriptMessage) => void;
   close: (tabID: number | undefined) => void;
 }

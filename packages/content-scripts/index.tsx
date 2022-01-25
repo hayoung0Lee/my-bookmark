@@ -3,8 +3,6 @@ import ReactDOM, { createPortal } from "react-dom";
 import App from "./src/App";
 import "./index.css";
 
-const IFRAME_WIDTH = "300px";
-
 const IFrame = ({
   open,
   children,
@@ -17,6 +15,7 @@ const IFrame = ({
 
   useEffect(() => {
     if (ref?.contentWindow?.document) {
+      // css
       var cssLink = document.createElement("link");
       cssLink.href = chrome.runtime.getURL(
         "packages/content-scripts/dist/index.css"
@@ -28,7 +27,12 @@ const IFrame = ({
   }, [ref]);
 
   return (
-    <iframe ref={setRef} width={open ? IFRAME_WIDTH : `10px`} height="100%">
+    <iframe
+      ref={setRef}
+      className={`fixed z-top h-screen ${
+        open ? "inset-0 w-screen" : "w-[20px] inset-y-0 right-0"
+      }`}
+    >
       {container && createPortal(children, container)}
     </iframe>
   );
@@ -36,24 +40,15 @@ const IFrame = ({
 
 const IframeWrapper = () => {
   const [open, toggleOpen] = useState(false);
-
-  useEffect(() => {
-    chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
-      toggleOpen(message.bookmarkOpen);
-      console.log("bookmarks", message.bookmarks);
-    });
-  }, []);
-
   return (
     <IFrame open={open}>
-      <App open={open} width={`w-[${IFRAME_WIDTH}]`} />
+      <App open={open} toggleOpen={toggleOpen} />
     </IFrame>
   );
 };
 
 const findOrCreateBookmarkRoot = () => {
   const rootID = "memo_bookmark";
-
   if (document.getElementById(rootID)) {
     return document.getElementById(rootID);
   }

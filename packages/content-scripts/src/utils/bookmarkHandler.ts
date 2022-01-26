@@ -2,7 +2,7 @@ import {
   REQUEST_BOOKMARK,
   CREATE_BOOKMARK,
   CLOSE_BOOKMARK,
-} from "../../../common";
+} from "../../../shared-types";
 
 export const createNewBooMark = () => {
   // backgroundScript에 메시지 보냄

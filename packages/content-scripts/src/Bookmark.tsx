@@ -6,7 +6,7 @@ import {
   registerContentScriptMessageListener,
   removeContentScriptMessageListener,
 } from "./utils/bookmarkHandler";
-import { BookmarkMessage } from "../../common";
+import { BookmarkMessage } from "../../shared-types";
 
 const Bookmark = ({
   closeBookMark,

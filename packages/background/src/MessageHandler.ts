@@ -36,9 +36,9 @@ export class MessageHandler<T extends MessageTarget> {
           this.messageTarget.create(request);
         }
 
-        // if (request.type === CLOSE_BOOKMARK) {
-        //   this.messageTarget.close(tabID);
-        // }
+        if (request.type === CLOSE_BOOKMARK) {
+          this.messageTarget.close(tabID);
+        }
 
         if (request.type === REQUEST_BOOKMARK) {
           this.messageTarget.set();

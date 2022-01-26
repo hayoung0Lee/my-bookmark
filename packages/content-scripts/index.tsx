@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import ReactDOM, { createPortal } from "react-dom";
+import ReactDOM from "react-dom";
 import App from "./src/App";
 import "./index.css";
+import { registerContentScriptMessageListener } from "./src/utils/bookmarkHandler";
+import { BookmarkMessage } from "../common/index";
 
 const rootID = "hayoung_bookmark";
 
@@ -18,9 +20,21 @@ const createBookmarkRoot = (): HTMLIFrameElement => {
     "inset-y-0",
     "right-0",
     "h-screen",
-    "opacity-70",
-    "bg-slate-300"
+    "w-[20px]"
   );
+
+  const onReceiveBookmarks = (
+    message: BookmarkMessage,
+    _sender: chrome.runtime.MessageSender,
+    _sendResponse: (response?: any) => void
+  ) => {
+    // const { bookmarkOpen } = message;
+    root.classList.toggle("w-[20px]");
+    root.classList.toggle("w-screen");
+  };
+
+  registerContentScriptMessageListener(onReceiveBookmarks);
+
   document.getElementsByTagName("body")[0].appendChild(root);
   return root;
 };

@@ -1,5 +1,8 @@
-import { REQUEST_BOOKMARK, CREATE_BOOKMARK } from "../../../common";
-import { BookmarkMessage } from "../../../common";
+import {
+  REQUEST_BOOKMARK,
+  CREATE_BOOKMARK,
+  CLOSE_BOOKMARK,
+} from "../../../common";
 
 export const createNewBooMark = () => {
   // backgroundScript에 메시지 보냄
@@ -10,6 +13,12 @@ export const createNewBooMark = () => {
 
 export const requestBookMarks = () => {
   chrome.runtime.sendMessage({ type: REQUEST_BOOKMARK }, function (response) {
+    console.log(response.data);
+  });
+};
+
+export const requestCloseBookMarks = () => {
+  chrome.runtime.sendMessage({ type: CLOSE_BOOKMARK }, function (response) {
     console.log(response.data);
   });
 };

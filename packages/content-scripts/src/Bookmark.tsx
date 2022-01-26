@@ -2,6 +2,7 @@ import BgWrapper from "./BgWrapper";
 import React, { useState, useEffect } from "react";
 import {
   requestBookMarks,
+  requestCloseBookMarks,
   registerContentScriptMessageListener,
   removeContentScriptMessageListener,
 } from "./utils/bookmarkHandler";
@@ -22,7 +23,6 @@ const Bookmark = ({
     _sendResponse: (response?: any) => void
   ) => {
     toggleOpen(message.bookmarkOpen);
-    alert("Bookmarks");
     console.log("bookmarks", message);
   };
 
@@ -32,6 +32,7 @@ const Bookmark = ({
 
     return () => {
       removeContentScriptMessageListener(onReceiveBookmarks);
+      requestCloseBookMarks();
     };
   }, []);
 

@@ -4,5 +4,5 @@ export const CLOSE_BOOKMARK = "close_bookmark";
 
 export interface BookmarkMessage {
   bookmarkOpen: boolean;
-  bookmarks: chrome.bookmarks.BookmarkTreeNode[];
+  bookmarks?: chrome.bookmarks.BookmarkTreeNode[];
 }

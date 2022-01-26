@@ -6,7 +6,7 @@ import BookmarkModal from "./BookmarkModal";
 const HoverApp = ({ openBookMark }: { openBookMark: () => void }) => {
   return (
     <div
-      className={`fixed right-0 w-[10] h-full bg-orange-400 opacity-20 hover:opacity-100`}
+      className={`fixed right-0 w-screen h-full bg-orange-400 opacity-20 hover:opacity-100`}
       onClick={openBookMark}
     ></div>
   );

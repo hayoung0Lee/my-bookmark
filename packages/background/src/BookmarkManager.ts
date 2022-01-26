@@ -1,6 +1,6 @@
 // https://developer.chrome.com/docs/extensions/reference/runtime/#event-onStartup
 import { ContentScriptMessage, MessageTarget } from "./types";
-
+import { BookmarkMessage } from "../../common";
 export class BookmarkManager implements MessageTarget {
   // bookmarks
   // bookmark 생성, 이런거 어떻게 처리할지?
@@ -23,7 +23,6 @@ export class BookmarkManager implements MessageTarget {
   }
 
   trigger() {
-    console.log("Trigger");
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       tabs.map((tab) => {
         if (tab.id) {
@@ -32,7 +31,7 @@ export class BookmarkManager implements MessageTarget {
             {
               bookmarkOpen: true,
               bookmarks: this.get(),
-            },
+            } as BookmarkMessage,
             function (response) {
               console.log(response);
             }
@@ -56,7 +55,7 @@ export class BookmarkManager implements MessageTarget {
         tabID,
         {
           bookmarkOpen: false,
-        },
+        } as BookmarkMessage,
         function (response) {
           console.log(response);
         }

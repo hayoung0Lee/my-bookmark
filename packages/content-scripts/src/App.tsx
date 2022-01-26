@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from "react";
-import Modal from "./Modal";
+import React, { useState } from "react";
+import Modal from "./common/Modal";
 import Bookmark from "./Bookmark";
-import { createNewBooMark, requestBookMarks } from "./utils/bookmarkHandler";
+import BookmarkModal from "./BookmarkModal";
 
-// https://developer.chrome.com/docs/extensions/reference/runtime/#event-onMessage
-const App = ({
-  open,
-  toggleOpen,
-}: {
-  open: boolean;
-  toggleOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const HoverApp = ({ openBookMark }: { openBookMark: () => void }) => {
+  return (
+    <div
+      className={`fixed right-0 w-[10] h-full bg-orange-400 opacity-20 hover:opacity-100`}
+      onClick={openBookMark}
+    ></div>
+  );
+};
+
+const App = () => {
   const [modal, openModal] = useState(false);
+  const [open, toggleOpen] = useState(false);
 
   const openBookMark = () => {
     toggleOpen(true);
@@ -31,34 +34,14 @@ const App = ({
         />
         {modal && (
           <Modal openModal={openModal}>
-            <div>
-              Create New Bookmark
-              <div>
-                <label>
-                  title
-                  <input />
-                </label>
-              </div>
-              <div>
-                <label>
-                  url
-                  <input />
-                </label>
-              </div>
-              <button onClick={createNewBooMark}>Save</button>
-            </div>
+            <BookmarkModal />
           </Modal>
         )}
       </>
     );
   }
 
-  return (
-    <div
-      className={`pointer-events-auto fixed right-0 w-[20] h-full opacity-20 bg-slate-300 hover:opacity-100 `}
-      onClick={openBookMark}
-    ></div>
-  );
+  return <HoverApp openBookMark={openBookMark} />;
 };
 
 export default App;

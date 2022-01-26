@@ -1,4 +1,4 @@
-import BgWrapper from "./BgWrapper";
+import BgWrapper from "../BgWrapper";
 
 interface Props {
   children: JSX.Element | string;

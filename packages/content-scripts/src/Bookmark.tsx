@@ -1,7 +1,6 @@
 import BgWrapper from "./BgWrapper";
 import React, { useState, useEffect } from "react";
 import {
-  createNewBooMark,
   requestBookMarks,
   registerContentScriptMessageListener,
   removeContentScriptMessageListener,

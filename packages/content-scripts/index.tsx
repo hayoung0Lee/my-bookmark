@@ -3,62 +3,45 @@ import ReactDOM, { createPortal } from "react-dom";
 import App from "./src/App";
 import "./index.css";
 
-const IFrame = ({
-  open,
-  children,
-}: {
-  open: boolean;
-  children: JSX.Element;
-}) => {
-  const [ref, setRef] = useState<HTMLIFrameElement | null>();
-  const container = ref?.contentWindow?.document?.body;
+const rootID = "hayoung_bookmark";
 
-  useEffect(() => {
-    if (ref?.contentWindow?.document) {
-      // css
-      var cssLink = document.createElement("link");
-      cssLink.href = chrome.runtime.getURL(
-        "packages/content-scripts/dist/index.css"
-      );
-      cssLink.rel = "stylesheet";
-      cssLink.type = "text/css";
-      ref?.contentWindow?.document.head.appendChild(cssLink);
-    }
-  }, [ref]);
-
-  return (
-    <iframe
-      ref={setRef}
-      className={`fixed z-top h-screen ${
-        open ? "inset-0 w-screen" : "w-[20px] inset-y-0 right-0"
-      }`}
-    >
-      {container && createPortal(children, container)}
-    </iframe>
-  );
+const getBookmarkRoot = (): HTMLIFrameElement | undefined => {
+  return document.getElementById(rootID) as HTMLIFrameElement;
 };
 
-const IframeWrapper = () => {
-  const [open, toggleOpen] = useState(false);
-  return (
-    <IFrame open={open}>
-      <App open={open} toggleOpen={toggleOpen} />
-    </IFrame>
-  );
-};
-
-const findOrCreateBookmarkRoot = () => {
-  const rootID = "memo_bookmark";
-  if (document.getElementById(rootID)) {
-    return document.getElementById(rootID);
-  }
-
-  const root = document.createElement("div");
+const createBookmarkRoot = (): HTMLIFrameElement => {
+  const root = document.createElement("iframe");
   root.id = rootID;
+  root.classList.add(
+    "z-top",
+    "fixed",
+    "inset-y-0",
+    "right-0",
+    "h-screen",
+    "opacity-70",
+    "bg-slate-300"
+  );
   document.getElementsByTagName("body")[0].appendChild(root);
   return root;
 };
 
-const rootDom = findOrCreateBookmarkRoot();
+const rootDom = getBookmarkRoot() || createBookmarkRoot();
+
+const IframeWrapper = () => {
+  const { head, body } = rootDom.contentWindow.document;
+
+  useEffect(() => {
+    // handling css
+    const cssLink = document.createElement("link");
+    cssLink.href = chrome.runtime.getURL(
+      "packages/content-scripts/dist/index.css"
+    );
+    cssLink.rel = "stylesheet";
+    cssLink.type = "text/css";
+    head.appendChild(cssLink);
+  });
+
+  return ReactDOM.createPortal(<App />, body);
+};
 
 ReactDOM.render(<IframeWrapper />, rootDom);

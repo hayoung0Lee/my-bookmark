@@ -7,11 +7,18 @@ const BgWrapper = ({ children, onClick }: Props) => {
   return (
     <div
       className="absolute w-screen h-screen flex justify-center items-center"
-      onClick={() => {
+      onClick={(e) => {
         onClick(false);
       }}
     >
-      {children}
+      <div
+        className="h-screen"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        {children}
+      </div>
     </div>
   );
 };

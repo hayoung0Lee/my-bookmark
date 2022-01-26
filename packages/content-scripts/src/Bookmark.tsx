@@ -7,6 +7,7 @@ import {
   removeContentScriptMessageListener,
 } from "./utils/bookmarkHandler";
 import { BookmarkMessage } from "../../shared-types";
+import BookmarkNodeGroup from "./BoomarkNodeGroup";
 
 const Bookmark = ({
   closeBookMark,
@@ -17,12 +18,17 @@ const Bookmark = ({
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   toggleOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const [bookmarks, setBookmarks] = useState<
+    chrome.bookmarks.BookmarkTreeNode[]
+  >([]);
+
   const onReceiveBookmarks = (
     message: BookmarkMessage,
     _sender: chrome.runtime.MessageSender,
     _sendResponse: (response?: any) => void
   ) => {
     toggleOpen(message.bookmarkOpen);
+    setBookmarks(message.bookmarks || []);
     console.log("bookmarks", message);
   };
 
@@ -39,7 +45,10 @@ const Bookmark = ({
   return (
     <BgWrapper onClick={closeBookMark}>
       <div
-        className={`fixed right-0 w-[500] h-full bg-slate-100 g-cyan-500 shadow-lg shadow-cyan-500/50 opacity-100`}
+        className={`overflow-y-auto fixed right-0 w-[500] h-full bg-slate-100 g-cyan-500 shadow-lg shadow-cyan-500/50 opacity-100`}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
       >
         Test
         <button
@@ -57,6 +66,12 @@ const Bookmark = ({
         >
           create New bookmark
         </button>
+        <div className="border-double border-4 border-indigo-600">
+          {bookmarks.map((bnode) => {
+            console.log("bnode", bnode);
+            return <BookmarkNodeGroup key={bnode.id} bnode={bnode} />;
+          })}
+        </div>
       </div>
     </BgWrapper>
   );

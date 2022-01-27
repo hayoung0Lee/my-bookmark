@@ -1,4 +1,5 @@
 import BookmarkNode from "./BookmarkNode";
+import { IoFolderOutline } from "react-icons/io5";
 
 const BookmarkFolder = ({
   bnode,
@@ -7,7 +8,9 @@ const BookmarkFolder = ({
 }) => {
   return (
     <div className="border-double border-4 border-indigo-600">
-      Group title: {bnode.title}
+      <div>
+        <IoFolderOutline /> {bnode.title}
+      </div>
       {bnode.children.map((bnode: chrome.bookmarks.BookmarkTreeNode) => {
         const isFolder = bnode.children;
         if (isFolder) {

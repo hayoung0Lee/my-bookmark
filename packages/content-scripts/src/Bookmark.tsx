@@ -9,6 +9,20 @@ import {
 import { BookmarkMessage } from "../../shared-types";
 import BookmarkMain from "./BookmarkMain";
 
+const Button = ({
+  children,
+  onClick,
+}: {
+  children: JSX.Element | string;
+  onClick: (e?: MouseEvent) => void;
+}) => {
+  return (
+    <button className="px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-full shadow-sm mx-2">
+      {children}
+    </button>
+  );
+};
+
 const Bookmark = ({
   closeBookMark,
   openModal,
@@ -45,27 +59,20 @@ const Bookmark = ({
   return (
     <BgWrapper onClick={closeBookMark}>
       <div
-        className={`overflow-y-auto fixed right-0 w-[500] h-full bg-slate-100 g-cyan-500 shadow-lg shadow-cyan-500/50 opacity-100`}
+        className={`overflow-y-auto fixed right-0 w-[500] h-full bg-slate-100 g-cyan-500 shadow-lg shadow-cyan-500/50 opacity-100 p-3`}
         onClick={(e) => {
           e.stopPropagation();
         }}
       >
-        Test
-        <button
-          className="border-solid border-2 border-indigo-600 block"
-          onClick={closeBookMark}
-        >
-          close
-        </button>
-        <button
-          className="border-solid border-2 border-indigo-600 block"
+        <Button
           onClick={(e) => {
             e.stopPropagation();
             openModal((prev) => !prev);
           }}
         >
-          create New bookmark
-        </button>
+          create
+        </Button>
+        <Button onClick={closeBookMark}>close</Button>
         <BookmarkMain bookmarks={bookmarks} />
       </div>
     </BgWrapper>

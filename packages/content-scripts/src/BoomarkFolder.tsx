@@ -10,7 +10,7 @@ const BookmarkFolder = ({
   const isRoot = !bnode.parentId;
   return (
     <>
-      <div className="flex items-center text-lg">
+      <div className={`flex items-center text-base ${isRoot ? "" : "my-3"}`}>
         {!isRoot && (
           <>
             <IoFolderOutline className="mx-1.5" />

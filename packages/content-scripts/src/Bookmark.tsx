@@ -7,7 +7,7 @@ import {
   removeContentScriptMessageListener,
 } from "./utils/bookmarkHandler";
 import { BookmarkMessage } from "../../shared-types";
-import BookmarkNodeGroup from "./BoomarkNodeGroup";
+import BookmarkMain from "./BookmarkMain";
 
 const Bookmark = ({
   closeBookMark,
@@ -66,12 +66,7 @@ const Bookmark = ({
         >
           create New bookmark
         </button>
-        <div className="border-double border-4 border-indigo-600">
-          {bookmarks.map((bnode) => {
-            console.log("bnode", bnode);
-            return <BookmarkNodeGroup key={bnode.id} bnode={bnode} />;
-          })}
-        </div>
+        <BookmarkMain bookmarks={bookmarks} />
       </div>
     </BgWrapper>
   );

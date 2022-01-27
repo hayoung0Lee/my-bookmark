@@ -18,7 +18,7 @@ const BookmarkFolder = ({
           </>
         )}
       </div>
-      <div className={isRoot ? `` : `pl-5`}>
+      <div className={isRoot ? `pl-1.5` : `pl-5`}>
         {bnode.children.map((bnode: chrome.bookmarks.BookmarkTreeNode) => {
           const isFolder = bnode.children;
           if (isFolder) {

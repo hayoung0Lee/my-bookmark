@@ -6,11 +6,11 @@ const BookmarkMain = ({
   bookmarks: chrome.bookmarks.BookmarkTreeNode[];
 }) => {
   return (
-    <div className="border-double border-4 border-indigo-600">
+    <>
       {bookmarks.map((bnode) => {
         return <BookmarkFolder key={bnode.id} bnode={bnode} />;
       })}
-    </div>
+    </>
   );
 };
 

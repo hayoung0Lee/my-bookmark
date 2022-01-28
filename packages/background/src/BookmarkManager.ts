@@ -1,14 +1,24 @@
 // https://developer.chrome.com/docs/extensions/reference/runtime/#event-onStartup
-import { ContentScriptMessage, MessageTarget } from "./types";
-import { BookmarkMessageType } from "../../shared-types";
-export class BookmarkManager implements MessageTarget {
-  // bookmarks
-  // bookmark 생성, 이런거 어떻게 처리할지?
-  // https://developer.chrome.com/docs/extensions/reference/bookmarks/#event-onCreated
+import {
+  Callback,
+  ContentScriptCallback,
+  CustomBookmarkCreateArg,
+  BookmarkMessageType,
+  REQUEST_BOOKMARK,
+  CREATE_BOOKMARK,
+  CLOSE_BOOKMARK,
+  BookmarkTarget,
+} from "../../shared-types";
+
+export class BookmarkManager implements BookmarkTarget {
   bookmarks: chrome.bookmarks.BookmarkTreeNode[] = [];
 
+  installedEvent: Callback[] = [];
+  clickIconEvent: Callback[] = [];
+  contentScriptEvent: ContentScriptCallback[] = [];
+
   constructor() {
-    this.set();
+    this.contentScriptEvent.push(this.contentScriptEventHandler);
   }
 
   get() {
@@ -21,6 +31,24 @@ export class BookmarkManager implements MessageTarget {
       this.trigger();
     });
   }
+
+  contentScriptEventHandler = (
+    message: any,
+    sender: chrome.runtime.MessageSender,
+    sendResponse: (response?: any) => void
+  ) => {
+    if (message.type === CREATE_BOOKMARK) {
+      this.create(message);
+    }
+    if (message.type === CLOSE_BOOKMARK) {
+      const tabID = sender.tab?.id;
+      this.close(tabID);
+    }
+
+    if (message.type === REQUEST_BOOKMARK) {
+      this.set();
+    }
+  };
 
   trigger() {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -41,9 +69,8 @@ export class BookmarkManager implements MessageTarget {
     });
   }
 
-  create(bookmarkArg: ContentScriptMessage) {
+  create(bookmarkArg: CustomBookmarkCreateArg) {
     const { index, parentId, title, url } = bookmarkArg;
-
     chrome.bookmarks.create({ index, parentId, title, url }, (result) => {
       this.set();
     });

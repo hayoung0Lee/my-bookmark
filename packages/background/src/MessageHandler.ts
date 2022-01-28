@@ -1,50 +1,62 @@
-import { MessageTarget, ContentScriptMessage } from "./types";
 import {
-  CREATE_BOOKMARK,
-  CLOSE_BOOKMARK,
-  REQUEST_BOOKMARK,
+  MessageTarget,
+  ContentScriptCallback,
+  Callback,
 } from "../../shared-types";
 
 export class MessageHandler<T extends MessageTarget> {
-  constructor(public messageTarget: T) {
-    this.initializeEvent();
+  private installedEvent: Callback[] = [];
+  private clickIconEvent: Callback[] = [];
+  private contentScriptEvent: ContentScriptCallback[] = [];
+
+  constructor(private messageTarget: T[]) {
+    this.registerEvents();
   }
 
-  initializeEvent() {
-    this.iconClickHandler();
-    this.contentScriptMessageReceiver();
-  }
-
-  iconClickHandler() {
-    // // When icon clicked
-    chrome.action.onClicked.addListener((tab) => {
-      // toggle message action 눌러서
-      if (tab.id) {
-        // send bookmark to contentscript
-        this.messageTarget.trigger(); // 보냄
-      }
+  registerEvents() {
+    this.messageTarget.map((mt) => {
+      this.installedEvent.push(...mt.installedEvent);
+      this.clickIconEvent.push(...mt.clickIconEvent);
+      this.contentScriptEvent.push(...mt.contentScriptEvent);
     });
   }
 
-  contentScriptMessageReceiver() {
-    // When button clicked in content script
-    chrome.runtime.onMessage.addListener(
-      (request: ContentScriptMessage, sender, sendResponse) => {
-        const tabID = sender.tab?.id;
-
-        if (request.type === CREATE_BOOKMARK) {
-          this.messageTarget.create(request);
-        }
-
-        if (request.type === CLOSE_BOOKMARK) {
-          this.messageTarget.close(tabID);
-        }
-
-        if (request.type === REQUEST_BOOKMARK) {
-          this.messageTarget.set();
-          console.log("MessageHandler");
-        }
+  installedHandler = (callback: Callback[]) => {
+    // installed Event
+    chrome.runtime.onInstalled.addListener(
+      (details: chrome.runtime.InstalledDetails) => {
+        callback.map((cb) => {
+          console.log(details);
+          cb();
+        });
       }
     );
-  }
+  };
+
+  clickIconHandler = (callback: Callback[]) => {
+    chrome.action.onClicked.addListener((tab) => {
+      console.log(tab);
+      if (tab.id) {
+        // send bookmark to contentscript
+        callback.map((cb) => {
+          cb();
+        });
+      }
+    });
+  };
+
+  contentScriptHandler = (callback: ContentScriptCallback[]) => {
+    // When button clicked in content script
+    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+      callback.map((cb) => {
+        cb(request, sender, sendResponse);
+      });
+    });
+  };
+
+  execute = () => {
+    this.installedHandler(this.installedEvent);
+    this.clickIconHandler(this.clickIconEvent);
+    this.contentScriptHandler(this.contentScriptEvent);
+  };
 }

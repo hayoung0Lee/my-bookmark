@@ -51,6 +51,9 @@ const Bookmark = ({
           e.stopPropagation();
         }}
       >
+        {/* <button className="px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-full shadow-sm mx-2">
+          Hello
+        </button> */}
         <Button
           onClick={(e) => {
             e.stopPropagation();
@@ -59,7 +62,13 @@ const Bookmark = ({
         >
           create
         </Button>
-        <Button onClick={closeBookMark}>close</Button>
+        <Button
+          onClick={(e) => {
+            closeBookMark();
+          }}
+        >
+          close
+        </Button>
         <BookmarkMain bookmarks={bookmarks} />
       </div>
     </BgWrapper>

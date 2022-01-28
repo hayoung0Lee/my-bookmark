@@ -3,7 +3,7 @@ import {
   CREATE_BOOKMARK,
   CLOSE_BOOKMARK,
   REQUEST_BOOKMARK,
-} from "../../common";
+} from "../../shared-types";
 
 export class MessageHandler<T extends MessageTarget> {
   constructor(public messageTarget: T) {

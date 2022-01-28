@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./src/App";
 import "./index.css";
 import { registerContentScriptMessageListener } from "./src/utils/bookmarkHandler";
-import { BookmarkMessage } from "../common/index";
+import { BookmarkMessageType } from "../shared-types";
 
 const rootID = "hayoung_bookmark";
 
@@ -24,7 +24,7 @@ const createBookmarkRoot = (): HTMLIFrameElement => {
   );
 
   const onReceiveBookmarks = (
-    message: BookmarkMessage,
+    message: BookmarkMessageType,
     _sender: chrome.runtime.MessageSender,
     _sendResponse: (response?: any) => void
   ) => {

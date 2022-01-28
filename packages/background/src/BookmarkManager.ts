@@ -1,6 +1,6 @@
 // https://developer.chrome.com/docs/extensions/reference/runtime/#event-onStartup
 import { ContentScriptMessage, MessageTarget } from "./types";
-import { BookmarkMessage } from "../../common";
+import { BookmarkMessageType } from "../../shared-types";
 export class BookmarkManager implements MessageTarget {
   // bookmarks
   // bookmark 생성, 이런거 어떻게 처리할지?
@@ -31,7 +31,7 @@ export class BookmarkManager implements MessageTarget {
             {
               bookmarkOpen: true,
               bookmarks: this.get(),
-            } as BookmarkMessage,
+            } as BookmarkMessageType,
             function (response) {
               console.log(response);
             }
@@ -55,7 +55,7 @@ export class BookmarkManager implements MessageTarget {
         tabID,
         {
           bookmarkOpen: false,
-        } as BookmarkMessage,
+        } as BookmarkMessageType,
         function (response) {
           console.log(response);
         }

@@ -6,7 +6,7 @@ interface Props {
 const BgWrapper = ({ children, onClick }: Props) => {
   return (
     <div
-      className="absolute w-screen h-screen flex justify-center items-center"
+      className={`absolute w-screen h-screen flex justify-center items-center`}
       onClick={(e) => {
         onClick(false);
       }}

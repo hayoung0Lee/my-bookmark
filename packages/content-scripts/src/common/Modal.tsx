@@ -2,13 +2,13 @@ import BgWrapper from "../BgWrapper";
 
 interface Props {
   children: JSX.Element | string;
-  openModal: () => void;
+  toggleModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Modal = ({ children, openModal }: Props) => {
+const Modal = ({ children, toggleModal }: Props) => {
   return (
-    <BgWrapper onClick={openModal}>
-      <div className="border-solid border-2 border-indigo-600 w-[400] h-[500] bg-white">
+    <BgWrapper onClick={() => toggleModal(false)}>
+      <div className="border-solid border-2  border-indigo-600 w-[400] h-[500] bg-white">
         Modal
         {children}
       </div>

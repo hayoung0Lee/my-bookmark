@@ -13,35 +13,26 @@ const HoverApp = ({ openBookMark }: { openBookMark: () => void }) => {
 };
 
 const App = () => {
-  const [modal, openModal] = useState(false);
-  const [open, toggleOpen] = useState(false);
+  const [modal, toggleModal] = useState(false);
+  const [bookmark, toggleBookmark] = useState(false);
 
-  const openBookMark = () => {
-    toggleOpen(true);
-  };
-
-  const closeBookMark = () => {
-    toggleOpen(false);
-  };
-
-  if (open) {
+  if (bookmark) {
     return (
       <>
         <Bookmark
-          closeBookMark={closeBookMark}
-          openModal={openModal}
-          toggleOpen={toggleOpen}
+          openModal={() => toggleModal(true)}
+          toggleBookmark={toggleBookmark}
         />
         {modal && (
-          <Modal openModal={() => openModal(true)}>
-            <BookmarkModal closeModal={() => openModal(false)} />
+          <Modal toggleModal={toggleModal}>
+            <BookmarkModal closeModal={() => toggleModal(false)} />
           </Modal>
         )}
       </>
     );
   }
 
-  return <HoverApp openBookMark={openBookMark} />;
+  return <HoverApp openBookMark={() => toggleBookmark(true)} />;
 };
 
 export default App;

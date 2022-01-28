@@ -11,13 +11,11 @@ import BookmarkMain from "./BookmarkMain";
 import Button from "./common/Button";
 
 const Bookmark = ({
-  closeBookMark,
   openModal,
-  toggleOpen,
+  toggleBookmark,
 }: {
-  closeBookMark: () => void;
-  openModal: React.Dispatch<React.SetStateAction<boolean>>;
-  toggleOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  openModal: () => void;
+  toggleBookmark: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [bookmarks, setBookmarks] = useState<
     chrome.bookmarks.BookmarkTreeNode[]
@@ -28,7 +26,7 @@ const Bookmark = ({
     _sender: chrome.runtime.MessageSender,
     _sendResponse: (response?: any) => void
   ) => {
-    toggleOpen(message.bookmarkOpen);
+    toggleBookmark(message.bookmarkOpen);
     setBookmarks(message.bookmarks || []);
   };
 
@@ -43,27 +41,24 @@ const Bookmark = ({
   }, []);
 
   return (
-    <BgWrapper onClick={closeBookMark}>
+    <BgWrapper onClick={() => toggleBookmark(false)}>
       <div
         className={`overflow-y-auto fixed right-0 w-[500] h-full bg-slate-100 g-cyan-500 shadow-lg shadow-cyan-500/50 opacity-100 p-3`}
         onClick={(e) => {
           e.stopPropagation();
         }}
       >
-        {/* <button className="px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-full shadow-sm mx-2">
-          Hello
-        </button> */}
         <Button
           onClick={(e) => {
             e.stopPropagation();
-            openModal((prev) => !prev);
+            openModal();
           }}
         >
           create
         </Button>
         <Button
           onClick={(e) => {
-            closeBookMark();
+            toggleBookmark(false);
           }}
         >
           close

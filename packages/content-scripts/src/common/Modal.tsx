@@ -2,7 +2,7 @@ import BgWrapper from "../BgWrapper";
 
 interface Props {
   children: JSX.Element | string;
-  openModal: React.Dispatch<React.SetStateAction<boolean>>;
+  openModal: () => void;
 }
 
 const Modal = ({ children, openModal }: Props) => {

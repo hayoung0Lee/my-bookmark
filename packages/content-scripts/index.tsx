@@ -23,17 +23,22 @@ const createBookmarkRoot = (): HTMLIFrameElement => {
     "w-[20px]"
   );
 
-  const onReceiveBookmarks = (
+  const handleIframeSize = (
     message: BookmarkMessageType,
     _sender: chrome.runtime.MessageSender,
     _sendResponse: (response?: any) => void
   ) => {
-    // const { bookmarkOpen } = message;
-    root.classList.toggle("w-[20px]");
-    root.classList.toggle("w-screen");
+    const { bookmarkOpen } = message;
+    if (bookmarkOpen) {
+      root.classList.remove("w-[20px]");
+      root.classList.add("w-screen");
+    } else {
+      root.classList.add("w-[20px]");
+      root.classList.remove("w-screen");
+    }
   };
 
-  registerContentScriptMessageListener(onReceiveBookmarks);
+  registerContentScriptMessageListener(handleIframeSize);
 
   document.getElementsByTagName("body")[0].appendChild(root);
   return root;

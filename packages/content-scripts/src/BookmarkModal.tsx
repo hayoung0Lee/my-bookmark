@@ -1,6 +1,6 @@
 import { createNewBooMark } from "./utils/bookmarkHandler";
 
-const BookmarkModal = () => {
+const BookmarkModal = ({ closeModal }: { closeModal: () => void }) => {
   return (
     <div>
       Create New Bookmark
@@ -16,7 +16,14 @@ const BookmarkModal = () => {
           <input />
         </label>
       </div>
-      <button onClick={createNewBooMark}>Save</button>
+      <button
+        onClick={() => {
+          createNewBooMark();
+          closeModal();
+        }}
+      >
+        Save
+      </button>
     </div>
   );
 };

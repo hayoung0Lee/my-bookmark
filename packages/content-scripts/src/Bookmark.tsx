@@ -30,7 +30,6 @@ const Bookmark = ({
   ) => {
     toggleOpen(message.bookmarkOpen);
     setBookmarks(message.bookmarks || []);
-    console.log("bookmarks", message);
   };
 
   useEffect(() => {

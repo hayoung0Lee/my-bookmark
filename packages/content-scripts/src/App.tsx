@@ -33,8 +33,8 @@ const App = () => {
           toggleOpen={toggleOpen}
         />
         {modal && (
-          <Modal openModal={openModal}>
-            <BookmarkModal />
+          <Modal openModal={() => openModal(true)}>
+            <BookmarkModal closeModal={() => openModal(false)} />
           </Modal>
         )}
       </>

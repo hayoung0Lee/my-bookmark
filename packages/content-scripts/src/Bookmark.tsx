@@ -6,7 +6,7 @@ import {
   registerContentScriptMessageListener,
   removeContentScriptMessageListener,
 } from "./utils/bookmarkHandler";
-import { BookmarkMessage } from "../../shared-types";
+import { BookmarkMessageType } from "../../shared-types";
 import BookmarkMain from "./BookmarkMain";
 import Button from "./common/Button";
 
@@ -24,7 +24,7 @@ const Bookmark = ({
   >([]);
 
   const onReceiveBookmarks = (
-    message: BookmarkMessage,
+    message: BookmarkMessageType,
     _sender: chrome.runtime.MessageSender,
     _sendResponse: (response?: any) => void
   ) => {

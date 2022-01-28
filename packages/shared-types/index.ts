@@ -27,9 +27,12 @@ export interface MessageTarget {
 }
 
 export interface BookmarkTarget extends MessageTarget {
-  get: () => void;
-  set: () => void;
-  trigger: () => void;
+  get: () => Promise<chrome.bookmarks.BookmarkTreeNode[]>;
+  contentScriptEventHandler: (
+    message: any,
+    sender: chrome.runtime.MessageSender,
+    sendResponse: (response?: any) => void
+  ) => void;
+  update: () => void;
   create: (bookmarkArg: CustomBookmarkCreateArg) => void;
-  close: (tabID: number | undefined) => void;
 }

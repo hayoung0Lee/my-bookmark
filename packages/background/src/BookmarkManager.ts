@@ -4,7 +4,6 @@ import {
   ContentScriptCallback,
   CustomBookmarkCreateArg,
   BookmarkMessageType,
-  REQUEST_BOOKMARK,
   CREATE_BOOKMARK,
   CLOSE_BOOKMARK,
   BookmarkTarget,
@@ -21,36 +20,40 @@ export class BookmarkManager implements BookmarkTarget {
     this.contentScriptEvent.push(this.contentScriptEventHandler);
   }
 
-  get() {
-    return this.bookmarks;
-  }
-
-  set() {
-    chrome.bookmarks.getTree((bookmarks) => {
-      this.bookmarks = bookmarks;
-      this.trigger();
+  get(): Promise<chrome.bookmarks.BookmarkTreeNode[]> {
+    return new Promise((resolve, reject) => {
+      try {
+        chrome.bookmarks.getTree((bookmarks) => {
+          this.bookmarks = bookmarks;
+          resolve(bookmarks);
+        });
+      } catch (err) {
+        reject(err);
+      }
     });
   }
 
-  contentScriptEventHandler = (
+  contentScriptEventHandler = async (
     message: any,
     sender: chrome.runtime.MessageSender,
     sendResponse: (response?: any) => void
   ) => {
-    if (message.type === CREATE_BOOKMARK) {
-      this.create(message);
-    }
     if (message.type === CLOSE_BOOKMARK) {
       const tabID = sender.tab?.id;
       this.close(tabID);
+      return;
     }
 
-    if (message.type === REQUEST_BOOKMARK) {
-      this.set();
+    if (message.type === CREATE_BOOKMARK) {
+      await this.create(message);
     }
+
+    // default: message.type === REQUEST_BOOKMARK
+    this.bookmarks = await this.get();
+    this.update();
   };
 
-  trigger() {
+  update() {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       tabs.map((tab) => {
         if (tab.id) {
@@ -58,7 +61,7 @@ export class BookmarkManager implements BookmarkTarget {
             tab.id,
             {
               bookmarkOpen: true,
-              bookmarks: this.get(),
+              bookmarks: this.bookmarks,
             } as BookmarkMessageType,
             function (response) {
               console.log(response);
@@ -69,12 +72,18 @@ export class BookmarkManager implements BookmarkTarget {
     });
   }
 
-  create(bookmarkArg: CustomBookmarkCreateArg) {
-    const { index, parentId, title, url } = bookmarkArg;
-    chrome.bookmarks.create({ index, parentId, title, url }, (result) => {
-      this.set();
+  create = async (bookmarkArg: CustomBookmarkCreateArg) => {
+    return new Promise<chrome.bookmarks.BookmarkTreeNode>((resolve, reject) => {
+      const { index, parentId, title, url } = bookmarkArg;
+      try {
+        chrome.bookmarks.create({ index, parentId, title, url }, (result) => {
+          resolve(result);
+        });
+      } catch (err) {
+        reject(err);
+      }
     });
-  }
+  };
 
   close(tabID: number | undefined) {
     if (tabID) {

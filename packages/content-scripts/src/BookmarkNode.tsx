@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { IoPizzaOutline } from "react-icons/io5";
+import Node from "./common/Node";
 
 const BookmarkNode = ({
   bnode,
@@ -9,11 +10,7 @@ const BookmarkNode = ({
   const [favicon, setFavicon] = useState(true);
 
   return (
-    <a
-      href={`${bnode.url}`}
-      target="_blank"
-      className="flex items-center text-base my-3"
-    >
+    <Node href={`${bnode.url}`} target="_blank">
       {favicon ? (
         <img
           className="w-5 h-5 mx-1.5"
@@ -26,7 +23,7 @@ const BookmarkNode = ({
         <IoPizzaOutline className="mx-1.5" />
       )}
       <span className="truncate">{bnode.title}</span>
-    </a>
+    </Node>
   );
 };
 

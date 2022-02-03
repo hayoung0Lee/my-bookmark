@@ -1,5 +1,6 @@
 import BookmarkNode from "./BookmarkNode";
 import { IoFolderOutline } from "react-icons/io5";
+import Node from "./common/Node";
 
 const BookmarkFolder = ({
   bnode,
@@ -10,15 +11,14 @@ const BookmarkFolder = ({
   const isRoot = !bnode.parentId;
   return (
     <>
-      <div className={`flex items-center text-base ${isRoot ? "" : "my-3"}`}>
-        {!isRoot && (
-          <>
-            <IoFolderOutline className="mx-1.5" />
-            {bnode.title || `BookmarksBar ${bnode.id}`}
-          </>
-        )}
-      </div>
-      <div className={isRoot ? `pl-1.5` : `pl-5`}>
+      {!isRoot && (
+        <Node>
+          <IoFolderOutline className="mx-1.5" />
+          {bnode.title || `BookmarksBar ${bnode.id}`}
+        </Node>
+      )}
+
+      <div className={isRoot ? `` : `ml-5`}>
         {bnode.children.map((bnode: chrome.bookmarks.BookmarkTreeNode) => {
           const isFolder = bnode.children;
           if (isFolder) {

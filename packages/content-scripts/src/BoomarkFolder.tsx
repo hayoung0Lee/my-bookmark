@@ -1,6 +1,7 @@
 import BookmarkNode from "./BookmarkNode";
 import { IoFolderOutline } from "react-icons/io5";
 import Node from "./common/Node";
+import DeleteButton from "./common/DeleteButton";
 
 const BookmarkFolder = ({
   bnode,
@@ -15,6 +16,7 @@ const BookmarkFolder = ({
         <Node>
           <IoFolderOutline className="mx-1.5" />
           {bnode.title || `BookmarksBar ${bnode.id}`}
+          <DeleteButton id={bnode.id} isFolder={true}></DeleteButton>
         </Node>
       )}
 

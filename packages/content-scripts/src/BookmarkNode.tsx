@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
-import { IoPizzaOutline, IoTrashBin } from "react-icons/io5";
+import { useState } from "react";
+import { IoPizzaOutline } from "react-icons/io5";
 import Node from "./common/Node";
-import { removeBookmark } from "./utils/bookmarkHandler";
+import DeleteButton from "./common/DeleteButton";
 
 const BookmarkNode = ({
   bnode,
@@ -24,15 +24,7 @@ const BookmarkNode = ({
         <IoPizzaOutline className="mx-1.5" />
       )}
       <span className="truncate">{bnode.title}</span>
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          removeBookmark({ id: bnode.id, isFolder: false });
-        }}
-      >
-        <IoTrashBin className="mx-2"></IoTrashBin>
-      </button>
+      <DeleteButton id={bnode.id} isFolder={false}></DeleteButton>
     </Node>
   );
 };

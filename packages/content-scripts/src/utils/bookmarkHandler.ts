@@ -2,6 +2,7 @@ import {
   REQUEST_BOOKMARK,
   CREATE_BOOKMARK,
   CLOSE_BOOKMARK,
+  REMOVE_BOOKMARK,
 } from "../../../shared-types";
 
 export const createNewBooMark = () => {
@@ -9,6 +10,15 @@ export const createNewBooMark = () => {
   chrome.runtime.sendMessage({ type: CREATE_BOOKMARK }, function (response) {
     console.log("Bookmarks", response);
   });
+};
+
+export const removeBookmark = ({ id, isFolder }) => {
+  chrome.runtime.sendMessage(
+    { type: REMOVE_BOOKMARK, id, isFolder },
+    function (response) {
+      console.log("removed", response);
+    }
+  );
 };
 
 export const requestBookMarks = () => {

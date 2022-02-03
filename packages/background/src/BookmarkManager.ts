@@ -6,6 +6,7 @@ import {
   BookmarkMessageType,
   CREATE_BOOKMARK,
   CLOSE_BOOKMARK,
+  REMOVE_BOOKMARK,
   BookmarkTarget,
 } from "../../shared-types";
 
@@ -17,6 +18,7 @@ export class BookmarkManager implements BookmarkTarget {
   contentScriptEvent: ContentScriptCallback[] = [];
 
   constructor() {
+    // FIXME: 이거좀 이상하긴 한듯. installedEvent, clickIconEvent도 따로 정의를 해줘야하는데 부자연스럽
     this.contentScriptEvent.push(this.contentScriptEventHandler);
   }
 
@@ -48,6 +50,9 @@ export class BookmarkManager implements BookmarkTarget {
       await this.create(message);
     }
 
+    if (message.type === REMOVE_BOOKMARK) {
+      await this.remove(message);
+    }
     // default: message.type === REQUEST_BOOKMARK
     this.bookmarks = await this.get();
     this.update();
@@ -79,6 +84,25 @@ export class BookmarkManager implements BookmarkTarget {
         chrome.bookmarks.create({ index, parentId, title, url }, (result) => {
           resolve(result);
         });
+      } catch (err) {
+        reject(err);
+      }
+    });
+  };
+
+  remove = async (message: any) => {
+    return new Promise<void>((resolve, reject) => {
+      const { id, isFolder } = message; // type은 folder or node;
+      try {
+        if (isFolder) {
+          chrome.bookmarks.removeTree(id, (result) => {
+            resolve(result);
+          });
+        } else {
+          chrome.bookmarks.remove(id, (result) => {
+            resolve(result);
+          });
+        }
       } catch (err) {
         reject(err);
       }

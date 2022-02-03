@@ -5,11 +5,19 @@ import {
   REMOVE_BOOKMARK,
 } from "../../../shared-types";
 
-export const createNewBooMark = () => {
+export const createNewBooMark = ({
+  index,
+  parentId,
+  title,
+  url,
+}: chrome.bookmarks.BookmarkCreateArg) => {
   // backgroundScript에 메시지 보냄
-  chrome.runtime.sendMessage({ type: CREATE_BOOKMARK }, function (response) {
-    console.log("Bookmarks", response);
-  });
+  chrome.runtime.sendMessage(
+    { type: CREATE_BOOKMARK, index, parentId, title, url },
+    function (response) {
+      console.log("Bookmarks", response);
+    }
+  );
 };
 
 export const removeBookmark = ({ id, isFolder }) => {

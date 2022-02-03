@@ -12,7 +12,6 @@ const BgWrapper = ({ children, onClick }: Props) => {
       }}
     >
       <div
-        className="h-screen"
         onClick={(e) => {
           e.stopPropagation();
         }}

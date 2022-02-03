@@ -49,14 +49,14 @@ const Bookmark = ({
             e.stopPropagation();
           }}
         >
-          <Button
+          {/* <Button
             onClick={(e) => {
               e.stopPropagation();
               openModal();
             }}
           >
             create
-          </Button>
+          </Button> */}
           <Button
             onClick={(e) => {
               toggleBookmark(false);
@@ -64,7 +64,7 @@ const Bookmark = ({
           >
             close
           </Button>
-          <BookmarkMain bookmarks={bookmarks} />
+          <BookmarkMain bookmarks={bookmarks} openModal={openModal} />
         </div>
       </div>
     </BgWrapper>

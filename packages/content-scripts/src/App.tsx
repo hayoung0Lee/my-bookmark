@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "./common/Modal";
 import Bookmark from "./Bookmark";
 import BookmarkModal from "./BookmarkModal";
+import { parentType } from "./types";
 
 const HoverApp = ({ openBookMark }: { openBookMark: () => void }) => {
   return (
@@ -15,17 +16,24 @@ const HoverApp = ({ openBookMark }: { openBookMark: () => void }) => {
 const App = () => {
   const [modal, toggleModal] = useState(false);
   const [bookmark, toggleBookmark] = useState(false);
+  const [parentId, setParentId] = useState<string>();
 
   if (bookmark) {
     return (
       <>
         <Bookmark
-          openModal={() => toggleModal(true)}
+          openModal={({ parentId }: parentType) => {
+            toggleModal(true);
+            setParentId(parentId);
+          }}
           toggleBookmark={toggleBookmark}
         />
         {modal && (
           <Modal toggleModal={toggleModal}>
-            <BookmarkModal closeModal={() => toggleModal(false)} />
+            <BookmarkModal
+              parentId={parentId}
+              closeModal={() => toggleModal(false)}
+            />
           </Modal>
         )}
       </>

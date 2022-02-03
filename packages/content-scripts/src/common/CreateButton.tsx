@@ -1,15 +1,16 @@
 import { IoAddCircle } from "react-icons/io5";
+import { openModalType, parentType } from "../types";
 
-type Props = Pick<chrome.bookmarks.BookmarkCreateArg, "parentId"> & {
-  openModal: () => void;
-};
+type props = {
+  openModal: openModalType;
+} & parentType;
 
-const CreateButton = ({ parentId, openModal }: Props) => {
+const CreateButton = ({ parentId, openModal }: props) => {
   return (
     <button
       onClick={(e) => {
         e.stopPropagation();
-        openModal();
+        openModal({ parentId });
       }}
     >
       <IoAddCircle className="mx-2" />

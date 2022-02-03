@@ -1,10 +1,11 @@
 import BookmarkFolder from "./BoomarkFolder";
+import { openModalType } from "./types";
 
 const BookmarkMain = ({
   bookmarks,
   openModal,
 }: {
-  openModal: () => void;
+  openModal: openModalType;
   bookmarks: chrome.bookmarks.BookmarkTreeNode[];
 }) => {
   return (

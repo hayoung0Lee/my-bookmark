@@ -9,12 +9,13 @@ import {
 import { BookmarkMessageType } from "../../shared-types";
 import BookmarkMain from "./BookmarkMain";
 import Button from "./common/Button";
+import { openModalType } from "./types";
 
 const Bookmark = ({
   openModal,
   toggleBookmark,
 }: {
-  openModal: () => void;
+  openModal: openModalType;
   toggleBookmark: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [bookmarks, setBookmarks] = useState<

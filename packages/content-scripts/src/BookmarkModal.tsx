@@ -1,10 +1,16 @@
 import { createNewBooMark } from "./utils/bookmarkHandler";
 import { useState } from "react";
+import { parentType } from "./types";
 
-const BookmarkModal = ({ closeModal }: { closeModal: () => void }) => {
+const BookmarkModal = ({
+  closeModal,
+  parentId,
+}: {
+  closeModal: () => void;
+} & parentType) => {
   const [title, setTitle] = useState<string>("");
   const [url, setUrl] = useState<string>(window.location.href);
-
+  console.log("==>", parentId);
   return (
     <div className={"bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"}>
       <div className={"mb-4"}>
@@ -49,7 +55,7 @@ const BookmarkModal = ({ closeModal }: { closeModal: () => void }) => {
             "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           }
           onClick={() => {
-            createNewBooMark({ parentId: "1", title, url });
+            createNewBooMark({ parentId, title, url });
             closeModal();
           }}
         >

@@ -3,12 +3,13 @@ import { IoFolderOutline } from "react-icons/io5";
 import Node from "./common/Node";
 import DeleteButton from "./common/DeleteButton";
 import CreateButton from "./common/CreateButton";
+import { openModalType, parentType } from "./types";
 
 const BookmarkFolder = ({
   bnode,
   openModal,
 }: {
-  openModal: () => void;
+  openModal: openModalType;
   bnode: chrome.bookmarks.BookmarkTreeNode;
 }) => {
   // root

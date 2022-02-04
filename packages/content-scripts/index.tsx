@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./src/App";
 import "./index.css";
 import { registerContentScriptMessageListener } from "./src/utils/bookmarkHandler";
-import { BookmarkMessageType } from "../shared-types";
+import { IframeMessageType, TARGET_IFRAME } from "../shared-types";
 
 const rootID = "hayoung_bookmark";
 
@@ -24,17 +24,21 @@ const createBookmarkRoot = (): HTMLIFrameElement => {
   );
 
   const handleIframeSize = (
-    message: BookmarkMessageType,
+    message: IframeMessageType,
     _sender: chrome.runtime.MessageSender,
     _sendResponse: (response?: any) => void
   ) => {
-    const { bookmarkOpen } = message;
-    if (bookmarkOpen) {
-      root.classList.remove("w-[20px]");
-      root.classList.add("w-screen");
-    } else {
-      root.classList.add("w-[20px]");
-      root.classList.remove("w-screen");
+    console.log("handleIframe Size", message);
+    if (message.to === "iframe") {
+      console.log("message", message);
+      const { iframeOpen } = message;
+      if (iframeOpen) {
+        root.classList.remove("w-[20px]");
+        root.classList.add("w-screen");
+      } else {
+        root.classList.add("w-[20px]");
+        root.classList.remove("w-screen");
+      }
     }
   };
 

@@ -1,8 +1,9 @@
 import {
   REQUEST_BOOKMARK,
   CREATE_BOOKMARK,
-  CLOSE_BOOKMARK,
   REMOVE_BOOKMARK,
+  CLOSE_IFRAME,
+  OPEN_IFRAME,
 } from "../../../shared-types";
 
 export const createNewBooMark = ({
@@ -35,8 +36,14 @@ export const requestBookMarks = () => {
   });
 };
 
-export const requestCloseBookMarks = () => {
-  chrome.runtime.sendMessage({ type: CLOSE_BOOKMARK }, function (response) {
+export const requestCloseIframe = () => {
+  chrome.runtime.sendMessage({ type: CLOSE_IFRAME }, function (response) {
+    console.log(response.data);
+  });
+};
+
+export const requestOpenIframe = () => {
+  chrome.runtime.sendMessage({ type: OPEN_IFRAME }, function (response) {
     console.log(response.data);
   });
 };

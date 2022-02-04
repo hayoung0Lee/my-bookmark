@@ -2,11 +2,11 @@ import FullSizeWrapper from "./common/FullSizeWrapper";
 import React, { useState, useEffect } from "react";
 import {
   requestBookMarks,
-  requestCloseBookMarks,
   registerContentScriptMessageListener,
   removeContentScriptMessageListener,
+  requestCloseIframe,
 } from "./utils/bookmarkHandler";
-import { BookmarkMessageType } from "../../shared-types";
+import { BookmarkMessageType, TARGET_BOOKMARK } from "../../shared-types";
 import BookmarkMain from "./BookmarkMain";
 import Button from "./common/Button";
 import { openModalType } from "./types";
@@ -27,8 +27,10 @@ const Bookmark = ({
     _sender: chrome.runtime.MessageSender,
     _sendResponse: (response?: any) => void
   ) => {
-    toggleBookmark(message.bookmarkOpen);
-    setBookmarks(message.bookmarks || []);
+    if (message.to === "bookmark") {
+      setBookmarks(message.bookmarks || []);
+      console.log("message", message);
+    }
   };
 
   useEffect(() => {
@@ -37,7 +39,6 @@ const Bookmark = ({
 
     return () => {
       removeContentScriptMessageListener(onReceiveBookmarks);
-      requestCloseBookMarks();
     };
   }, []);
 
@@ -50,16 +51,9 @@ const Bookmark = ({
             e.stopPropagation();
           }}
         >
-          {/* <Button
-            onClick={(e) => {
-              e.stopPropagation();
-              openModal();
-            }}
-          >
-            create
-          </Button> */}
           <Button
             onClick={(e) => {
+              requestCloseIframe();
               toggleBookmark(false);
             }}
           >

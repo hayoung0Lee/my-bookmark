@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Active from "./Active";
 import InActive from "./InActive";
+import { requestOpenIframe } from "./utils/bookmarkHandler";
 
 const App = () => {
   const [bookmark, toggleBookmark] = useState(false);
@@ -9,7 +10,14 @@ const App = () => {
     return <Active toggleBookmark={toggleBookmark} />;
   }
 
-  return <InActive openBookMark={() => toggleBookmark(true)} />;
+  return (
+    <InActive
+      openBookMark={() => {
+        requestOpenIframe();
+        toggleBookmark(true);
+      }}
+    />
+  );
 };
 
 export default App;

@@ -5,9 +5,10 @@ import {
   CustomBookmarkCreateArg,
   BookmarkMessageType,
   CREATE_BOOKMARK,
-  CLOSE_BOOKMARK,
   REMOVE_BOOKMARK,
   BookmarkTarget,
+  TARGET_BOOKMARK,
+  REQUEST_BOOKMARK,
 } from "../../shared-types";
 
 export class BookmarkManager implements BookmarkTarget {
@@ -40,22 +41,24 @@ export class BookmarkManager implements BookmarkTarget {
     sender: chrome.runtime.MessageSender,
     sendResponse: (response?: any) => void
   ) => {
-    if (message.type === CLOSE_BOOKMARK) {
-      const tabID = sender.tab?.id;
-      this.close(tabID);
-      return;
-    }
-
     if (message.type === CREATE_BOOKMARK) {
       await this.create(message);
+      // default: message.type === REQUEST_BOOKMARK
+      this.bookmarks = await this.get();
+      this.update();
     }
 
     if (message.type === REMOVE_BOOKMARK) {
       await this.remove(message);
+      // default: message.type === REQUEST_BOOKMARK
+      this.bookmarks = await this.get();
+      this.update();
     }
-    // default: message.type === REQUEST_BOOKMARK
-    this.bookmarks = await this.get();
-    this.update();
+
+    if (message.type === REQUEST_BOOKMARK) {
+      this.bookmarks = await this.get();
+      this.update();
+    }
   };
 
   update() {
@@ -65,8 +68,8 @@ export class BookmarkManager implements BookmarkTarget {
           chrome.tabs.sendMessage(
             tab.id,
             {
-              bookmarkOpen: true,
               bookmarks: this.bookmarks,
+              to: "bookmark",
             } as BookmarkMessageType,
             function (response) {
               console.log(response);
@@ -108,18 +111,4 @@ export class BookmarkManager implements BookmarkTarget {
       }
     });
   };
-
-  close(tabID: number | undefined) {
-    if (tabID) {
-      chrome.tabs.sendMessage(
-        tabID,
-        {
-          bookmarkOpen: false,
-        } as BookmarkMessageType,
-        function (response) {
-          console.log(response);
-        }
-      );
-    }
-  }
 }

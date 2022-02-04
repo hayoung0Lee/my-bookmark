@@ -1,8 +1,8 @@
-const InActive = ({ openBookMark }: { openBookMark: () => void }) => {
+const InActive = ({ activate }: { activate: () => void }) => {
   return (
     <div
       className={`fixed right-0 w-[20px] h-full bg-orange-400 opacity-20 hover:opacity-100`}
-      onClick={openBookMark}
+      onClick={activate}
     ></div>
   );
 };

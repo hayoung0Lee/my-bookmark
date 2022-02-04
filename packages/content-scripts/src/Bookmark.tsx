@@ -13,10 +13,10 @@ import { openModalType } from "./types";
 
 const Bookmark = ({
   openModal,
-  toggleBookmark,
+  deActivate,
 }: {
   openModal: openModalType;
-  toggleBookmark: React.Dispatch<React.SetStateAction<boolean>>;
+  deActivate: () => void;
 }) => {
   const [bookmarks, setBookmarks] = useState<
     chrome.bookmarks.BookmarkTreeNode[]
@@ -43,7 +43,7 @@ const Bookmark = ({
   }, []);
 
   return (
-    <FullSizeWrapper onClick={() => toggleBookmark(false)}>
+    <FullSizeWrapper onClick={() => deActivate()}>
       <div className="h-screen">
         <div
           className={`overflow-y-auto fixed right-0 w-[500] h-full bg-slate-100 g-cyan-500 shadow-lg shadow-cyan-500/50 opacity-100`}
@@ -51,14 +51,7 @@ const Bookmark = ({
             e.stopPropagation();
           }}
         >
-          <Button
-            onClick={(e) => {
-              requestCloseIframe();
-              toggleBookmark(false);
-            }}
-          >
-            close
-          </Button>
+          <Button onClick={() => deActivate()}>close</Button>
           <BookmarkMain bookmarks={bookmarks} openModal={openModal} />
         </div>
       </div>

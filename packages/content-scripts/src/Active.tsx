@@ -3,13 +3,10 @@ import Bookmark from "./Bookmark";
 import { parentType } from "./types";
 import React, { useState } from "react";
 
-const Active = ({
-  toggleBookmark,
-}: {
-  toggleBookmark: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const Active = ({ deActivate }: { deActivate: () => void }) => {
   const [modal, toggleModal] = useState(false);
   const [parentId, setParentId] = useState<string>();
+
   return (
     <>
       <Bookmark
@@ -17,7 +14,7 @@ const Active = ({
           toggleModal(true);
           setParentId(parentId);
         }}
-        toggleBookmark={toggleBookmark}
+        deActivate={deActivate}
       />
       {modal && (
         <Modal

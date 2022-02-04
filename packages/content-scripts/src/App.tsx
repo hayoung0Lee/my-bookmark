@@ -1,23 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Active from "./Active";
 import InActive from "./InActive";
-import { requestOpenIframe } from "./utils/bookmarkHandler";
+import { requestCloseIframe, requestOpenIframe } from "./utils/bookmarkHandler";
 
 const App = () => {
-  const [bookmark, toggleBookmark] = useState(false);
+  const [active, setActive] = useState(false);
 
-  if (bookmark) {
-    return <Active toggleBookmark={toggleBookmark} />;
+  const activate = useCallback(() => {
+    requestOpenIframe();
+    setActive(true);
+  }, []);
+
+  const deActivate = useCallback(() => {
+    requestCloseIframe();
+    setActive(false);
+  }, []);
+
+  if (active) {
+    return <Active deActivate={deActivate} />;
   }
 
-  return (
-    <InActive
-      openBookMark={() => {
-        requestOpenIframe();
-        toggleBookmark(true);
-      }}
-    />
-  );
+  return <InActive activate={activate} />;
 };
 
 export default App;

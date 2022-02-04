@@ -3,11 +3,11 @@ interface Props {
   onClick: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const BgWrapper = ({ children, onClick }: Props) => {
+const FullSizeWrapper = ({ children, onClick }: Props) => {
   return (
     <div
       className={`absolute w-screen h-screen flex justify-center items-center`}
-      onClick={(e) => {
+      onClick={(_e) => {
         onClick(false);
       }}
     >
@@ -22,4 +22,4 @@ const BgWrapper = ({ children, onClick }: Props) => {
   );
 };
 
-export default BgWrapper;
+export default FullSizeWrapper;

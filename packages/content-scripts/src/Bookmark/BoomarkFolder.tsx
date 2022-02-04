@@ -1,9 +1,9 @@
 import BookmarkNode from "./BookmarkNode";
 import { IoFolderOutline } from "react-icons/io5";
-import Node from "./common/Node";
-import DeleteButton from "./common/DeleteButton";
-import CreateButton from "./common/CreateButton";
-import { openModalType, parentType } from "./types";
+import Node from "../common/Node";
+import DeleteButton from "./DeleteButton";
+import CreateButton from "./CreateButton";
+import { openModalType, parentType } from "../utils/types";
 
 const BookmarkFolder = ({
   bnode,

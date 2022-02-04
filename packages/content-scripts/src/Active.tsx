@@ -1,6 +1,6 @@
-import Modal from "./common/Modal";
+import Modal from "./Modal";
 import Bookmark from "./Bookmark";
-import { parentType } from "./types";
+import { parentType } from "./utils/types";
 import React, { useState } from "react";
 
 const Active = ({ deActivate }: { deActivate: () => void }) => {

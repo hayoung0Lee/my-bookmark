@@ -1,6 +1,6 @@
-import FullSizeWrapper from "./FullSizeWrapper";
+import FullSizeWrapper from "../common/FullSizeWrapper";
 import { useState } from "react";
-import { parentType } from "../types";
+import { parentType } from "../utils/types";
 import { createNewBooMark } from "../utils/bookmarkHandler";
 
 interface Props {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IoPizzaOutline } from "react-icons/io5";
-import Node from "./common/Node";
-import DeleteButton from "./common/DeleteButton";
+import Node from "../common/Node";
+import DeleteButton from "./DeleteButton";
 
 const BookmarkNode = ({
   bnode,

@@ -1,5 +1,5 @@
 import { IoAddCircle } from "react-icons/io5";
-import { openModalType, parentType } from "../types";
+import { openModalType, parentType } from "../utils/types";
 
 type props = {
   openModal: openModalType;

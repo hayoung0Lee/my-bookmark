@@ -1,15 +1,15 @@
-import FullSizeWrapper from "./common/FullSizeWrapper";
+import FullSizeWrapper from "../common/FullSizeWrapper";
 import React, { useState, useEffect } from "react";
 import {
   requestBookMarks,
   registerContentScriptMessageListener,
   removeContentScriptMessageListener,
   requestCloseIframe,
-} from "./utils/bookmarkHandler";
-import { BookmarkMessageType, TARGET_BOOKMARK } from "../../shared-types";
+} from "../utils/bookmarkHandler";
+import { BookmarkMessageType, TARGET_BOOKMARK } from "../../../shared-types";
 import BookmarkMain from "./BookmarkMain";
-import Button from "./common/Button";
-import { openModalType } from "./types";
+import Button from "../common/Button";
+import { openModalType } from "../utils/types";
 
 const Bookmark = ({
   openModal,

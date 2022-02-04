@@ -1,19 +1,20 @@
 import FullSizeWrapper from "../common/FullSizeWrapper";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { parentType } from "../utils/types";
 import { createNewBooMark } from "../utils/bookmarkHandler";
+import { ModalContext } from "../context/ModalContext";
 
-interface Props {
-  toggleModal: React.Dispatch<React.SetStateAction<boolean>>;
-  closeModal: () => void;
-}
-
-const Modal = ({ toggleModal, closeModal, parentId }: Props & parentType) => {
+const Modal = () => {
   const [title, setTitle] = useState<string>("");
   const [url, setUrl] = useState<string>(window.location.href);
+  const { isOpen, closeModal, parentId } = useContext(ModalContext);
+
+  if (!isOpen) {
+    return null;
+  }
 
   return (
-    <FullSizeWrapper onClick={() => toggleModal(false)}>
+    <FullSizeWrapper onClick={() => closeModal()}>
       <div className={"bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"}>
         <div className={"mb-4"}>
           <label

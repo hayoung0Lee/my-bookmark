@@ -64,3 +64,7 @@ https://developer.chrome.com/docs/extensions/mv3/messaging/
 ## Ionic icons
 
 https://ionic.io/ionicons
+
+## Intrinsic Elements
+
+https://www.typescriptlang.org/docs/handbook/jsx.html#intrinsic-elements

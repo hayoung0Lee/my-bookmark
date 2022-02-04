@@ -1,16 +1,16 @@
 import { IoAddCircle } from "react-icons/io5";
 import { openModalType, parentType } from "../utils/types";
+import { ModalContext } from "../context/ModalContext";
+import { useContext } from "react";
 
-type props = {
-  openModal: openModalType;
-} & parentType;
+const CreateButton = ({ parentId }: parentType) => {
+  const { openModal } = useContext(ModalContext);
 
-const CreateButton = ({ parentId, openModal }: props) => {
   return (
     <button
       onClick={(e) => {
         e.stopPropagation();
-        openModal({ parentId });
+        openModal(parentId);
       }}
     >
       <IoAddCircle className="mx-2" />

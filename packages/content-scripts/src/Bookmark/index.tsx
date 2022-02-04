@@ -11,13 +11,7 @@ import BookmarkMain from "./BookmarkMain";
 import Button from "../common/Button";
 import { openModalType } from "../utils/types";
 
-const Bookmark = ({
-  openModal,
-  deActivate,
-}: {
-  openModal: openModalType;
-  deActivate: () => void;
-}) => {
+const Bookmark = ({ deActivate }: { deActivate: () => void }) => {
   const [bookmarks, setBookmarks] = useState<
     chrome.bookmarks.BookmarkTreeNode[]
   >([]);
@@ -29,7 +23,6 @@ const Bookmark = ({
   ) => {
     if (message.to === "bookmark") {
       setBookmarks(message.bookmarks || []);
-      console.log("message", message);
     }
   };
 
@@ -52,7 +45,7 @@ const Bookmark = ({
           }}
         >
           <Button onClick={() => deActivate()}>close</Button>
-          <BookmarkMain bookmarks={bookmarks} openModal={openModal} />
+          <BookmarkMain bookmarks={bookmarks} />
         </div>
       </div>
     </FullSizeWrapper>

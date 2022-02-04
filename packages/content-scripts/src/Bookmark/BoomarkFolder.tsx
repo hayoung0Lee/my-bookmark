@@ -7,9 +7,7 @@ import { openModalType, parentType } from "../utils/types";
 
 const BookmarkFolder = ({
   bnode,
-  openModal,
 }: {
-  openModal: openModalType;
   bnode: chrome.bookmarks.BookmarkTreeNode;
 }) => {
   // root
@@ -20,10 +18,7 @@ const BookmarkFolder = ({
         <Node>
           <IoFolderOutline className="mx-1.5" />
           {bnode.title || `BookmarksBar ${bnode.id}`}
-          <CreateButton
-            parentId={bnode.id}
-            openModal={openModal}
-          ></CreateButton>
+          <CreateButton parentId={bnode.id} />
           <DeleteButton id={bnode.id} isFolder={true}></DeleteButton>
         </Node>
       )}
@@ -32,13 +27,7 @@ const BookmarkFolder = ({
         {bnode.children.map((bnode: chrome.bookmarks.BookmarkTreeNode) => {
           const isFolder = bnode.children;
           if (isFolder) {
-            return (
-              <BookmarkFolder
-                key={bnode.id}
-                bnode={bnode}
-                openModal={openModal}
-              />
-            );
+            return <BookmarkFolder key={bnode.id} bnode={bnode} />;
           } else {
             return <BookmarkNode key={bnode.id} bnode={bnode} />;
           }

@@ -1,19 +1,15 @@
 import BookmarkFolder from "./BoomarkFolder";
-import { openModalType } from "./types";
+import { openModalType } from "../utils/types";
 
 const BookmarkMain = ({
   bookmarks,
-  openModal,
 }: {
-  openModal: openModalType;
   bookmarks: chrome.bookmarks.BookmarkTreeNode[];
 }) => {
   return (
     <>
       {bookmarks.map((bnode) => {
-        return (
-          <BookmarkFolder key={bnode.id} bnode={bnode} openModal={openModal} />
-        );
+        return <BookmarkFolder key={bnode.id} bnode={bnode} />;
       })}
     </>
   );

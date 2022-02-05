@@ -6,7 +6,7 @@ import {
   MessageTarget,
   IframeMessageType,
   TARGET_IFRAME,
-} from "../../shared-types";
+} from "shared-types";
 
 export class IframeManager implements MessageTarget {
   installedEvent: Callback[] = [];

@@ -4,7 +4,7 @@ import {
   REMOVE_BOOKMARK,
   CLOSE_IFRAME,
   OPEN_IFRAME,
-} from "../../../shared-types";
+} from "shared-types";
 
 export const createNewBooMark = ({
   index,
@@ -23,7 +23,6 @@ export const createNewBooMark = ({
 
 export const removeBookmark = ({ id, isFolder }) => {
   console.log(id, isFolder);
-  alert("hello");
   chrome.runtime.sendMessage(
     { type: REMOVE_BOOKMARK, id, isFolder },
     function (response) {

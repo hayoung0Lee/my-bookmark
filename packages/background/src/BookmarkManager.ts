@@ -48,7 +48,7 @@ export class BookmarkManager implements BookmarkTarget {
       this.update();
     }
 
-    if (message.type === "remove_bookmark") {
+    if (message.type === REMOVE_BOOKMARK) {
       await this.remove(message);
       this.bookmarks = await this.get();
       this.update();
@@ -68,7 +68,7 @@ export class BookmarkManager implements BookmarkTarget {
             tab.id,
             {
               bookmarks: this.bookmarks,
-              to: "bookmark",
+              to: TARGET_BOOKMARK,
             } as BookmarkMessageType,
             function (response) {
               console.log(response);
@@ -95,7 +95,6 @@ export class BookmarkManager implements BookmarkTarget {
   remove = async (message: any) => {
     return new Promise<void>((resolve, reject) => {
       const { id, isFolder } = message; // type은 folder or node;
-      console.log("id ", id, isFolder);
       try {
         if (isFolder) {
           chrome.bookmarks.removeTree(id, (result) => {

@@ -21,7 +21,7 @@ const Bookmark = ({ deActivate }: { deActivate: () => void }) => {
     _sender: chrome.runtime.MessageSender,
     _sendResponse: (response?: any) => void
   ) => {
-    if (message.to === "bookmark") {
+    if (message.to === TARGET_BOOKMARK) {
       setBookmarks(message.bookmarks || []);
     }
   };

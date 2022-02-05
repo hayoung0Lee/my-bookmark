@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./src/App";
 import "./index.css";
 import { registerContentScriptMessageListener } from "./src/utils/bookmarkHandler";
-import { IframeMessageType } from "shared-types";
+import { IframeMessageType, TARGET_IFRAME } from "shared-types";
 
 const rootID = "hayoung_bookmark";
 
@@ -28,7 +28,7 @@ const createBookmarkRoot = (): HTMLIFrameElement => {
     _sender: chrome.runtime.MessageSender,
     _sendResponse: (response?: any) => void
   ) => {
-    if (message.to === "iframe") {
+    if (message.to === TARGET_IFRAME) {
       const { iframeOpen } = message;
       if (iframeOpen) {
         root.classList.remove("w-[20px]");

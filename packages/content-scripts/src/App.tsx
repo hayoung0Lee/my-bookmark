@@ -5,7 +5,6 @@ import { requestCloseIframe, requestOpenIframe } from "./utils/bookmarkHandler";
 
 const App = () => {
   const [active, setActive] = useState(false);
-
   const activate = useCallback(() => {
     requestOpenIframe();
     setActive(true);

@@ -22,14 +22,13 @@ export class IframeManager implements MessageTarget {
     sender: chrome.runtime.MessageSender,
     sendResponse: (response?: any) => void
   ) => {
-    console.log("iframe message", message);
-    if (message.type === "open_iframe") {
+    if (message.type === OPEN_IFRAME) {
       const tabID = sender.tab?.id;
       this.open(tabID);
       return;
     }
 
-    if (message.type === "close_iframe") {
+    if (message.type === CLOSE_IFRAME) {
       const tabID = sender.tab?.id;
       this.close(tabID);
       return;
@@ -37,13 +36,12 @@ export class IframeManager implements MessageTarget {
   };
 
   open(tabID: number | undefined) {
-    console.log("open!", tabID);
     if (tabID) {
       chrome.tabs.sendMessage(
         tabID,
         {
           iframeOpen: true,
-          to: "iframe",
+          to: TARGET_IFRAME,
         } as IframeMessageType,
         function (response) {
           console.log(response);
@@ -56,7 +54,7 @@ export class IframeManager implements MessageTarget {
     if (tabID) {
       chrome.tabs.sendMessage(
         tabID,
-        { iframeOpen: false, to: "iframe" } as IframeMessageType,
+        { iframeOpen: false, to: TARGET_IFRAME } as IframeMessageType,
         function (response) {
           console.log(response);
         }

@@ -68,3 +68,10 @@ https://ionic.io/ionicons
 ## Intrinsic Elements
 
 https://www.typescriptlang.org/docs/handbook/jsx.html#intrinsic-elements
+
+## How to install sibling
+
+- npx lerna add shared-types@1.0.0 --scope=content-scripts --dev
+- https://github.com/lerna/lerna/tree/main/commands/add#readme
+
+- I don't understand the difference between lerna boostrap vs lerna link.

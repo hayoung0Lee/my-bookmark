@@ -24,8 +24,8 @@ export const ModalContextWrapper = ({
   const value = {
     isOpen,
     parentId,
-    openModal: openModal,
-    closeModal: closeModal,
+    openModal,
+    closeModal,
   };
 
   return (

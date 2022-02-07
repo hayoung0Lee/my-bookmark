@@ -1,4 +1,8 @@
-import { MessageTarget, ContentScriptCallback, Callback } from "shared-types";
+import {
+  MessageTarget,
+  ContentScriptCallback,
+  Callback,
+} from "@hayoung-bookmark/shared-types";
 
 export class MessageHandler<T extends MessageTarget> {
   private installedEvent: Callback[] = [];

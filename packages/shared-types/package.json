@@ -1,5 +1,5 @@
 {
-  "name": "shared-types",
+  "name": "@hayoung-bookmark/shared-types",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

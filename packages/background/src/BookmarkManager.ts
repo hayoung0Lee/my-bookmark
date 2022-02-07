@@ -9,7 +9,7 @@ import {
   BookmarkTarget,
   TARGET_BOOKMARK,
   REQUEST_BOOKMARK,
-} from "shared-types";
+} from "@hayoung-bookmark/shared-types";
 
 export class BookmarkManager implements BookmarkTarget {
   bookmarks: chrome.bookmarks.BookmarkTreeNode[] = [];

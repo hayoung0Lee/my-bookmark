@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./src/App";
 import "./index.css";
 import { registerContentScriptMessageListener } from "./src/utils/bookmarkHandler";
-import { IframeMessageType, TARGET_IFRAME } from "shared-types";
+import { IframeMessageType, TARGET_IFRAME } from "@hayoung-bookmark/shared-types";
 
 const rootID = "hayoung_bookmark";
 

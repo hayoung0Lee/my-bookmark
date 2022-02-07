@@ -75,3 +75,7 @@ https://www.typescriptlang.org/docs/handbook/jsx.html#intrinsic-elements
 - https://github.com/lerna/lerna/tree/main/commands/add#readme
 
 - I don't understand the difference between lerna boostrap vs lerna link.
+
+## Publish
+
+https://developer.chrome.com/docs/webstore/publish/

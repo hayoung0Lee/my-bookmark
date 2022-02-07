@@ -22,7 +22,6 @@ export const createNewBooMark = ({
 };
 
 export const removeBookmark = ({ id, isFolder }) => {
-  console.log(id, isFolder);
   chrome.runtime.sendMessage(
     { type: REMOVE_BOOKMARK, id, isFolder },
     function (response) {

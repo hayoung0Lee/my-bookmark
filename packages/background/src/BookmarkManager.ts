@@ -42,7 +42,6 @@ export class BookmarkManager implements BookmarkTarget {
     return new Promise((resolve, reject) => {
       try {
         chrome.bookmarks.getTree((bookmarks) => {
-          this.bookmarks = bookmarks;
           resolve(bookmarks);
         });
       } catch (err) {

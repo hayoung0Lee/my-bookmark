@@ -39,7 +39,7 @@ const Bookmark = ({ deActivate }: { deActivate: () => void }) => {
     <FullSizeWrapper onClick={() => deActivate()}>
       <div className="h-screen">
         <div
-          className={`overflow-y-auto fixed right-0 w-[500] h-full p-2 bg-zinc-100 shadow-lg`}
+          className={`overflow-y-auto fixed right-0 w-[500] h-full p-2 bg-zinc-100 shadow-lg shadow-zinc-400/50 `}
           onClick={(e) => {
             e.stopPropagation();
           }}

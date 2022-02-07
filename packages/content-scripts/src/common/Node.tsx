@@ -9,9 +9,8 @@ const Node = ({
 }) => {
   return (
     <a
-      className={`flex items-center text-base py-2.5 hover:bg-red-300 ${
-        className ? className : ""
-      }`}
+      className={`flex items-center text-base py-2.5 hover:bg-gray-300 ${className ? className : ""
+        }`}
       {...props}
     >
       {children}

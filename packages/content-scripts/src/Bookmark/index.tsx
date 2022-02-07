@@ -39,12 +39,15 @@ const Bookmark = ({ deActivate }: { deActivate: () => void }) => {
     <FullSizeWrapper onClick={() => deActivate()}>
       <div className="h-screen">
         <div
-          className={`overflow-y-auto fixed right-0 w-[500] h-full bg-slate-100 g-cyan-500 shadow-lg shadow-cyan-500/50 opacity-100`}
+          className={`overflow-y-auto fixed right-0 w-[500] h-full p-2 bg-zinc-100 shadow-lg`}
           onClick={(e) => {
             e.stopPropagation();
           }}
         >
-          <Button onClick={() => deActivate()}>close</Button>
+          <div className="flex justify-between items-center">
+            <div className="text-2xl">Simple Bookmark</div>
+            <Button onClick={() => deActivate()}>close</Button>
+          </div>
           <BookmarkMain bookmarks={bookmarks} />
         </div>
       </div>

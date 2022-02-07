@@ -21,7 +21,22 @@ export class BookmarkManager implements BookmarkTarget {
   constructor() {
     // FIXME: 이거좀 이상하긴 한듯. installedEvent, clickIconEvent도 따로 정의를 해줘야하는데 부자연스럽
     this.contentScriptEvent.push(this.contentScriptEventHandler);
+
+    [
+      chrome.bookmarks.onChanged,
+      chrome.bookmarks.onChildrenReordered,
+      chrome.bookmarks.onCreated,
+      chrome.bookmarks.onMoved,
+      chrome.bookmarks.onRemoved,
+    ].map((fn) => {
+      fn.addListener(this.onBookmarkChanged);
+    });
   }
+
+  onBookmarkChanged = async () => {
+    this.bookmarks = await this.get();
+    this.update();
+  };
 
   get(): Promise<chrome.bookmarks.BookmarkTreeNode[]> {
     return new Promise((resolve, reject) => {

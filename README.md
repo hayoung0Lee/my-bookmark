@@ -33,12 +33,14 @@ I added shared constants and interfaces in this package.
 
 ## My blog posts
 
-- [Using Lerna to manage my project in a Mono Repo way](https://hayoung-techlog.com/using-lerna-to-manage-my-project-in-a-mono-repo-way)
-- [Using iframe with React Portal to isolate my component](https://hayoung-techlog.com/using-iframe-with-react-portal-to-isolate-my-component)
-- [Using iframe as a root of my React App with createPortal and functional components](https://hayoung-techlog.com/using-iframe-as-a-root-of-my-react-app-with-createportal-and-functional-components)
-- [How to retrieve favicon of websites(easiest way)](https://hayoung-techlog.com/how-to-retrieve-favicon-of-websiteseasiest-way)
-- [Using React Context to remove prop drilling](https://hayoung-techlog.com/using-react-context-to-remove-prop-drilling)
-- [How I used Tailwind CSS transition](https://hayoung-techlog.com/how-i-used-tailwind-css-transition)
+These are blog posts I wrote while working on this project.
+
+1. [Using Lerna to manage my project in a Mono Repo way](https://hayoung-techlog.com/using-lerna-to-manage-my-project-in-a-mono-repo-way)
+2. [Using iframe with React Portal to isolate my component](https://hayoung-techlog.com/using-iframe-with-react-portal-to-isolate-my-component)
+3. [Using iframe as a root of my React App with createPortal and functional components](https://hayoung-techlog.com/using-iframe-as-a-root-of-my-react-app-with-createportal-and-functional-components)
+4. [How to retrieve favicon of websites(easiest way)](https://hayoung-techlog.com/how-to-retrieve-favicon-of-websiteseasiest-way)
+5. [Using React Context to remove prop drilling](https://hayoung-techlog.com/using-react-context-to-remove-prop-drilling)
+6. [How I used Tailwind CSS transition](https://hayoung-techlog.com/how-i-used-tailwind-css-transition)
 
 ## How to run
 

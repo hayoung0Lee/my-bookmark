@@ -82,6 +82,9 @@ https://developer.chrome.com/docs/webstore/publish/
 
 ## lerna 지우고 yarn workspace 한번 해보자
 
+- https://nuhends.tistory.com/58
+- [원티드랩 글](https://medium.com/wantedjobs/lerna%EC%99%80-yarn-workspaces%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%ED%8C%A8%ED%82%A4%EC%A7%80-%EA%B4%80%EB%A6%AC-429d2a685486)
+
 ## type만 있는 패키지 만드는 방법???
 
 이건 걍 지워야하려나

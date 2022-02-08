@@ -1,6 +1,6 @@
 {
-    "name": "Bookmark with memo",
-    "description": "This is a bookmark extension with memo feature",
+    "name": "Simple Bookmark",
+    "description": "This is a simple bookmark extension",
     "version": "1.0",
     "manifest_version": 3,
     "background": {
@@ -9,9 +9,6 @@
     "options_page": "packages/options/dist/index.html",
     "permissions": [
         "bookmarks",
-        "storage",
-        "activeTab",
-        "scripting",
         "tabs"
     ],
     "content_scripts": [

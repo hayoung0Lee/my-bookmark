@@ -4,7 +4,7 @@ import {
   REMOVE_BOOKMARK,
   CLOSE_IFRAME,
   OPEN_IFRAME,
-} from "@hayoung-bookmark/shared-types";
+} from "@hayoung-bookmark/common";
 
 export const createNewBooMark = ({
   index,

@@ -6,7 +6,7 @@ import {
   MessageTarget,
   IframeMessageType,
   TARGET_IFRAME,
-} from "@hayoung-bookmark/shared-types";
+} from "@hayoung-bookmark/common";
 
 export class IframeManager implements MessageTarget {
   installedEvent: Callback[] = [];

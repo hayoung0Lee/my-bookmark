@@ -6,7 +6,7 @@ import {
   removeContentScriptMessageListener,
   requestCloseIframe,
 } from "../utils/bookmarkHandler";
-import { BookmarkMessageType, TARGET_BOOKMARK } from "@hayoung-bookmark/shared-types";
+import { BookmarkMessageType, TARGET_BOOKMARK } from "@hayoung-bookmark/common";
 import BookmarkMain from "./BookmarkMain";
 import Button from "../common/Button";
 import { openModalType } from "../utils/types";

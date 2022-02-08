@@ -1,10 +1,10 @@
 {
-  "name": "@hayoung-bookmark/shared-types",
+  "name": "@hayoung-bookmark/common",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo testing shared-types",
+    "test": "echo testing common",
     "start": "parcel ./index.ts -p 3003",
     "build": "parcel build ./index.ts"
   },

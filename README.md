@@ -87,6 +87,10 @@ https://developer.chrome.com/docs/webstore/publish/
 
 - [A Beginner's Guide to Lerna with Yarn Workspaces](https://medium.com/@jsilvax/a-workflow-guide-for-lerna-with-yarn-workspaces-60f97481149d)
 
+- [이글Lerna와 yarn-workspace를 활용한 Mono Repo (Typescript & Jest) 환경 구성하기](https://jojoldu.tistory.com/585)
+
+- [How to import a common module in CRA using Yarn workspaces?](https://stackoverflow.com/questions/56838735/how-to-import-a-common-module-in-cra-using-yarn-workspaces)
+
 ## type만 있는 패키지 만드는 방법???
 
 이건 걍 지워야하려나

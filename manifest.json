@@ -6,7 +6,7 @@
     "background": {
         "service_worker": "packages/background/dist/index.js"
     },
-    "options_page": "packages/options/public/index.html",
+    "options_page": "packages/options/dist/index.html",
     "permissions": [
         "bookmarks",
         "storage",

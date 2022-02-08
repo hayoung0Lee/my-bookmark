@@ -12,7 +12,6 @@
   "license": "ISC",
   "devDependencies": {
     "@types/chrome": "^0.0.176",
-    "@types/node": "^17.0.10",
     "@hayoung-bookmark/shared-types": "*"
   },
   "dependencies": {

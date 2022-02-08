@@ -4,6 +4,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
     "start": "lerna run start --parallel",
+    "build": "lerna run build --parallel",
     "test": "lerna run test",
     "new-version": "lerna version --conventional-commits --yes",
     "diff": "lerna diff"

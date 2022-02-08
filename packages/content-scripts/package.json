@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "test": "echo testing content-scripts",
-    "start": "parcel ./index.tsx -p 3001"
+    "start": "parcel ./index.tsx -p 3001",
+    "build": "parcel build ./index.tsx"
   },
   "author": "",
   "license": "ISC",

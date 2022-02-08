@@ -2,10 +2,10 @@
   "name": "@hayoung-bookmark/background",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo testing background",
-    "start": "parcel ./index.ts -p 3000"
+    "start": "parcel ./index.ts -p 3000",
+    "build": "parcel build ./index.ts"
   },
   "keywords": [],
   "author": "",

@@ -2,10 +2,10 @@
   "name": "@hayoung-bookmark/options",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo testing options",
-    "start": "parcel index.html -p 3002"
+    "start": "parcel index.html -p 3002",
+    "build": "parcel build ./index.html"
   },
   "author": "",
   "license": "ISC",

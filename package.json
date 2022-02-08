@@ -1,3 +1,14 @@
 {
-  "name": "@hayoung-bookmark/my-bookmark"
+  "name": "my-bookmark",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "start": "lerna run start --parallel",
+    "test": "lerna run test",
+    "new-version": "lerna version --conventional-commits --yes",
+    "diff": "lerna diff"
+  }
 }

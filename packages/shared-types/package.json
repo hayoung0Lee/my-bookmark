@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo testing shared-types",
-    "start": "parcel ./index.ts",
+    "start": "parcel ./index.ts -p 3003",
     "build": "parcel build ./index.ts"
   },
   "keywords": [],

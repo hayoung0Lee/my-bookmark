@@ -79,3 +79,9 @@ https://www.typescriptlang.org/docs/handbook/jsx.html#intrinsic-elements
 ## Publish
 
 https://developer.chrome.com/docs/webstore/publish/
+
+## lerna 지우고 yarn workspace 한번 해보자
+
+## type만 있는 패키지 만드는 방법???
+
+이건 걍 지워야하려나

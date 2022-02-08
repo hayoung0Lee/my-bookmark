@@ -17,12 +17,12 @@ background script and content script.
 
 ## Structure
 
-### background script
+### Background script
 
 I took an object-oriented approach to handle the background script. When it
 receives CRUD requests on bookmarks or iframe events, it processes those events.
 
-### content script
+### Content script
 
 I used an iframe element to inject my script into any web page. It uses React,
 Tailwind.
